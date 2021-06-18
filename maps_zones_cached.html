@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Turf Path help</title>
+        <script>
+            var base_url = "https://turfutils.github.io/";
+        </script>
+
+        <link rel="shortcut icon" type="image/x-icon" href="/turf/assets/icons/favicon.ico" />
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+        <!-- <script src="/turf/assets/js/maps.js" crossorigin=""></script> -->
+        <link rel="stylesheet" href="assets/js/vendor/leaflet/fullscreen/Control.FullScreen.css" />
+        <link rel="stylesheet" href="assets/js/vendor/leaflet/markercluster/MarkerCluster.css" />
+        <link rel="stylesheet" href="assets/js/vendor/leaflet/markercluster/MarkerCluster.Default.css" />
+
+        <script type="text/javascript" src="assets/js/vendor/leaflet/fullscreen/Control.FullScreen.js"></script>
+        <script type="text/javascript" src="assets/js/vendor/leaflet/markercluster/leaflet.markercluster.js"></script>
+        <script type="text/javascript" src="assets/js/vendor/leaflet/colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
+
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+            }
+            #map {
+                width: 600px;
+                height: 400px;
+            }
+        </style>
+        <style>body { padding: 0; margin: 0; } #map { height: 100%; width: 100vw; }</style>
+
+    </head>
+    <body>
+
+        <div id='map'></div>
+
+        <script>
+            var ajaxRequest;
+            var zones;  // Zone locations
+            var polyline;  // Paths to and from a zone
+            var plotlayers = [];
+            var disable_load = 0;
+
+            var markers = L.markerClusterGroup({
+                chunkedLoading: true,
+                disableClusteringAtZoom: 16,
+                maxClusterRadius: 40,
+                spiderfyOnMaxZoom: true
+            });
+
+            var Icon38 = L.Icon.extend({
+                options: {
+                    shadowUrl: '',
+                    iconSize: [38, 38],
+                    iconAnchor: [19, 19],
+                    popupAnchor: [0, -22]
+                }
+            });
+            var Icon19 = L.Icon.extend({
+                options: {
+                    shadowUrl: '',
+                    iconSize: [19, 19],
+                    iconAnchor: [9, 9],
+                    popupAnchor: [0, -9]
+                }
+            });
+            var playerIcon = new Icon38({iconUrl: 'assets/icons/crosshair-38.png'}),
+                    enemyIcon = new Icon38({iconUrl: 'assets/icons/crosshair-others-38.png'}),
+                    zoneBigIcon = new Icon38({iconUrl: 'assets/icons/zone-red-38.png'});
+
+            var zoneSmallIcon = new Icon19({iconUrl: 'assets/icons/zone-red-19.png'});
+
+            var cyclAttr = '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+            ajaxRequest = getXmlHttpObject();
+
+            var map = L.map('map').fitWorld();
+
+            var dark_filter = ['invert:100%', 'bright:78%', 'contrast:82%', 'hue:194deg', 'saturate:270%'];
+            var dark2_filter = ['hue:180deg', 'invert:100%'];
+
+// cycle, atlas, outdoors, landscape, transport, spinal-map
+            L.tileLayer.colorFilter('https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=5f657c7815d84e0087b875df01b3aa33', {
+                id: 'MapID',
+                tileSize: 256,
+                zoomOffset: 0,
+                attribution: cyclAttr,
+                filter: dark2_filter
+            }).addTo(map);
+
+            function onLocationFound(e) {
+                var radius = e.accuracy / 2;
+
+                //L.marker(e.latlng).addTo(map);
+
+                //L.circle(e.latlng, radius).addTo(map);
+            }
+
+            function onLocationError(e) {
+                //alert(e.message);
+            }
+
+            map.on('locationfound', onLocationFound);
+            map.on('locationerror', onLocationError);
+
+            map.locate({setView: true, maxZoom: 16});
+
+            askForPlots();
+            map.on('moveend', onMapMove);
+            map.on('autopanstart', onAutopanStart);
+
+
+            function getXmlHttpObject() {
+                if (window.XMLHttpRequest) {
+                    return new XMLHttpRequest();
+                }
+                if (window.ActiveXObject) {
+                    return new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                return null;
+            }
+
+            function askForPlots() {
+                if (typeof askForPlots.oldLat1 === 'undefined') {
+                    askForPlots.oldLat1 = '0';
+                    askForPlots.oldLng2 = '0';
+                    askForPlots.oldZoom = 0;
+                }
+                // request the marker info with AJAX for the current bounds
+                var bounds = map.getBounds();
+                var zoom = map.getZoom();
+                var minll = bounds.getSouthWest();
+                var maxll = bounds.getNorthEast();
+                var strLat1 = (minll.lat - 0.01).toFixed(2);
+                var strLng1 = (minll.lng - 0.01).toFixed(2);
+                var strLat2 = (maxll.lat + 0.01).toFixed(2);
+                var strLng2 = (maxll.lng + 0.01).toFixed(2);
+                // Only look for new data if we moved the window enough:
+                if (strLat1 !== askForPlots.oldLat1 || strLng1 !== askForPlots.oldLng2 || zoom !== askForPlots.oldZoom) {
+                    askForPlots.oldLat1 = strLat1;
+                    askForPlots.oldLng2 = strLng1;
+                    askForPlots.oldZoom = zoom;
+                    //var strUrl = base_url + 'index.php/api/test/' + strLat1 + '/' + strLng1 + '/' + strLat2 + '/' + strLng2 + '/' + zoom.toFixed(1);
+                    if (zoom >= 10) {
+                        // Turf api only returns zones at zoom levels 10-18
+                        var strUrl = 'https://api.turfgame.com/unstable/zones';
+                        var view_area = [{
+                                "northEast": {"latitude": strLat2, "longitude": strLng2},
+                                "southWest": {"latitude": strLat1, "longitude": strLng1}
+                            }];
+                        ajaxRequest.onreadystatechange = zones_arrived;
+                        ajaxRequest.open('POST', strUrl, true);
+                        ajaxRequest.setRequestHeader("Accept", "application/json");
+                        ajaxRequest.setRequestHeader("Content-Type", "application/json");
+                        ajaxRequest.send(JSON.stringify(view_area));
+                    } else {
+                        // @TODO Get clusters instead
+                    }
+                }
+            }
+
+            function zones_arrived() {
+                var zoom = map.getZoom();
+                var paths = [];
+
+                if (ajaxRequest.readyState == 4) {
+                    if (ajaxRequest.status == 200) {
+                        if (ajaxRequest.responseText.length < 5) {
+                            return false;
+                        }
+                        zones = eval("(" + ajaxRequest.responseText + ")");
+                        markers.off();  //remove listeners, they won't get removed by clearLayers().
+                        markers.clearLayers();
+
+                        var markerList = [];
+                        var polyList = [];
+                        var marker;
+                        var polyPoints;
+                        var zone_polygon;
+                        for (i = 0; i < zones.length; i++) {
+
+                            if (zoom > 15 && typeof zones[i].polygon !== 'undefined') {
+                                //polyPoints = arrayify(zones[i].polygon);
+                                //polyList.push([polyPoints]);
+                            } else if (zoom > 10 && typeof zones[i].latitude !== 'undefined') {
+                                marker = L.marker(L.latLng(zones[i].latitude, zones[i].longitude), {icon: enemyIcon, title: zones[i].name, alt: zones[i].name, zone_id: zones[i].id});
+                                markerList.push(marker);
+                            }
+                        }
+
+                        if (polyList.length > 0) {
+                            zone_polygon = L.polygon(polyList, {
+                                color: '#ff0000',
+                                fillColor: '#ff5555',
+                                fillOpacity: 0.5
+                            });
+                        }
+
+                        markers.on('click', function (a) {
+                            // Zone clicked, get the paths to/from this zone.
+                            //console.log('marker id: ' + a.layer.options.zone_id);
+                            get_paths(a.layer.options.zone_id);
+                        });
+                        markers.addLayers(markerList);
+                        map.addLayer(markers);
+                    }
+                }
+            }
+
+
+            function paths_arrived() {
+                var zoom = map.getZoom();
+
+                if (ajaxRequest.readyState == 4) {
+                    if (ajaxRequest.status == 200) {
+                        if (ajaxRequest.responseText.length < 5) {
+                            return false;
+                        }
+                        var paths;
+                        paths = eval("(" + ajaxRequest.responseText + ")");
+
+                        polyline = L.polyline(paths, {color: 'red'}).addTo(map);
+
+                        map.fitBounds(polyline.getBounds());
+                    }
+                }
+            }
+
+
+            function get_paths(zone_id) {
+                console.log('marker id: ' + zone_id);
+                var strUrl = base_url + 'cache/zone_paths/' + zone_id;
+                ajaxRequest.onreadystatechange = paths_arrived;
+                ajaxRequest.open('GET', strUrl, true);
+                ajaxRequest.setRequestHeader("Accept", "application/json");
+                ajaxRequest.setRequestHeader("Content-Type", "application/json");
+                ajaxRequest.send();
+            }
+
+            function onMapMove(e) {
+                if (disable_load === 1) {
+                    // Prevent popup disappearing on autopan
+                    disable_load = 0;
+                } else {
+                    askForPlots();
+                }
+            }
+
+            function onAutopanStart(e) {
+                disable_load = 1;
+            }
+
+
+            var rad = function (x) {
+                return x * Math.PI / 180;
+            };
+
+            var getDistance = function (p1, p2) {
+                var R = 6378137; // Earth’s mean radius in meter
+                var dLat = rad(p2.lat - p1.lat);
+                var dLong = rad(p2.lng - p1.lng);
+                var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                        Math.cos(rad(p1.lat)) * Math.cos(rad(p2.lat)) *
+                        Math.sin(dLong / 2) * Math.sin(dLong / 2);
+                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                var d = R * c;
+                return d; // returns the distance in meter
+            };
+
+            function nl2br(str, is_xhtml) {
+                var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : '<br>';
+
+                return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+            }
+        </script>
+
+
+
+    </body>
+</html>
