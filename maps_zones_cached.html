@@ -150,7 +150,7 @@
                     //var strUrl = base_url + 'index.php/api/test/' + strLat1 + '/' + strLng1 + '/' + strLat2 + '/' + strLng2 + '/' + zoom.toFixed(1);
                     if (zoom >= 10) {
                         // Turf api only returns zones at zoom levels 10-18
-                        var strUrl = 'https://api.turfgame.com/unstable/zones';
+                        var strUrl = 'https://api.turfgame.com/v4/zones';
                         var view_area = [{
                                 "northEast": {"latitude": strLat2, "longitude": strLng2},
                                 "southWest": {"latitude": strLat1, "longitude": strLng1}
