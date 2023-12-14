@@ -1,0 +1,25 @@
+table {padding-top: 20px;}
+
+table tr:nth-child(even) { background-color: #040;}
+
+table th {
+    font-family: monospace;
+    font-size: 20px;
+    color: #CC0;
+    background-color: #330;
+}
+table td {
+    font-family: monospace;
+    font-size: 20px;
+    text-align: right;
+}
+
+.up {color: #0A0; }
+.down {color: #F50; }
+
+table td:nth-child(4) {
+    text-align: left;
+}​
+table td:nth-child(7) {
+    text-align: center;
+}​
