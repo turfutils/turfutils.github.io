@@ -1,14 +1,14 @@
-table {padding-top: 20px;}
+.hiscore_table {padding-top: 20px;}
 
-table tr:nth-child(even) { background-color: #040;}
+.hiscore_table tr:nth-child(even) { background-color: #040;}
 
-table th {
+.hiscore_table th {
     font-family: monospace;
     font-size: 20px;
     color: #CC0;
     background-color: #330;
 }
-table td {
+.hiscore_table td {
     font-family: monospace;
     font-size: 20px;
     text-align: right;
@@ -17,9 +17,13 @@ table td {
 .up {color: #0A0; }
 .down {color: #F50; }
 
-table td:nth-child(4) {
+.hiscore_table td:nth-child(4) {
     text-align: left;
-}​
-table td:nth-child(7) {
+}
+.hiscore_table td:nth-child(8) {
     text-align: center;
-}​
+}
+
+input {
+    color: white;
+}
