@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <title>Turf EQualized scoring</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- Mobile Specific Metas
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- FONT
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+        <!-- CSS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/barebones.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/turf.css" rel="stylesheet" type="text/css" />
+        
+        <script src="http://localhost/turf/assets/js/sortable.min.js"></script>
+        <? //= link_tag('assets/css/sortable/sortable-theme-minimal.css'); ?>
+        
+        <link rel="icon" type="image/png" href="assets/img/favicon-16.png">
+
+    </head>
+    <body>
+
+        <!--<div class="grid-container halves">-->
+        <div style="padding-left:5px;">
+            
+<div style="max-width: 700px">
+    <h1>Turf EQualized scoring</h1>
+    <h4>Round 2024-09</h4>
+    <p>
+    <a href="2024-08.html">&lt;&lt; 2024-08</a> --- 
+    <a href="2024-10.html">2024-10 &gt;&gt;</a>
+    </p>
+    
+    <p>EQualized scoring: Everyone gets 100 
+        <u title="Points Per Take">PPT</u> and no <u title="Points Per Hour">PPH</u> or yellow bonus.
+        There is a small bonus for number of taken zones during a month (max 2000 zones). 
+        There is also a bonus for taking lots of zones the last 24 hours (max 100 zones). 
+        The max bonus can be another 100 PPT so a total of 200 PPT.
+        This counts <u>taken</u> zones, not held zones. It does not matter if you lose your zones.
+        No disadvantage in towns with high turf activity and low PPT. 
+        Unfairness that still remains - uneven distribution of zones.
+    </p>
+    <p>Columns left to right: [Placement difference], [EQplace], 
+        [Turfplace], [Name], [EQscore], [% diff], [Turfscore]. 
+    </p>
+
+    <p>Updated <b>2024-09-02T19:58:18+00:00</b></p>
+
+    <input type="text" id="searchInput" onkeyup="searchName()" placeholder="Search for names..">
+
+</div>
+<table id="scoretable" border="0" cellpadding="4" cellspacing="0" class="hiscore_table sortable-theme-bootstrap" data-sortable>
+<thead>
+<tr>
+<th>-+</th><th>#</th><th>(#)</th><th>NAME</th><th>NEW</th><th>DIFF</th><th>OLD</th><th>COUNTRY</th><th>AREA</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><nobr class="up">+908</nobr></td><td>1</td><td>909</td><td><a href="https://frut.zundin.se/user_round.php?userid=birgit.n" target="_blank" rel="noopener noreferrer">birgit.n</a></td><td>2050</td><td>43%</td><td>4709</td><td><a href="https://turf.mitt.land/profile/birgit.n" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Nordnorge</td></tr>
+<tr>
+<td><nobr class="up">+1801</nobr></td><td>2</td><td>1803</td><td><a href="https://frut.zundin.se/user_round.php?userid=roffish" target="_blank" rel="noopener noreferrer">roffish</a></td><td>403</td><td>42%</td><td>951</td><td><a href="https://turf.mitt.land/profile/roffish" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Nordnorge</td></tr>
+<tr>
+<td><nobr class="up">+1961</nobr></td><td>3</td><td>1964</td><td><a href="https://frut.zundin.se/user_round.php?userid=mariegumman" target="_blank" rel="noopener noreferrer">mariegumman</a></td><td>303</td><td>44%</td><td>676</td><td><a href="https://turf.mitt.land/profile/mariegumman" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Nordnorge</td></tr>
+<tr>
+<td><nobr class="up">+2243</nobr></td><td>4</td><td>2247</td><td><a href="https://frut.zundin.se/user_round.php?userid=playboy69" target="_blank" rel="noopener noreferrer">playboy69</a></td><td>200</td><td>42%</td><td>472</td><td><a href="https://turf.mitt.land/profile/playboy69" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Nordnorge</td></tr>
+<tr>
+<td><nobr class="up">+3896</nobr></td><td>5</td><td>3901</td><td><a href="https://frut.zundin.se/user_round.php?userid=GeoZebra" target="_blank" rel="noopener noreferrer">GeoZebra</a></td><td>100</td><td>42%</td><td>235</td><td><a href="https://turf.mitt.land/profile/GeoZebra" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Nordnorge</td></tr>
+</tbody>
+</table>        </div>
+        <!--</div>-->
+
+
+        <script>
+            function searchName() {
+                // Declare variables
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("searchInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("scoretable");
+                tr = table.getElementsByTagName("tr");
+
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[3];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+
+
+        </script>
+    </body>
+</html>
