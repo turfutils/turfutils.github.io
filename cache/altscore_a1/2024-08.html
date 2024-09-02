@@ -27,8 +27,8 @@
     <body>
 
         <!--<div class="grid-container halves">-->
-            <div style="padding-left:5px;">
-                
+        <div style="padding-left:5px;">
+            
 <div style="max-width: 700px">
     <h1>Turf EQualized scoring</h1>
     <h4>Round 2024-08</h4>
@@ -50,10 +50,12 @@
         [Turfplace], [Name], [EQscore], [% diff], [Turfscore]. 
     </p>
 
-    <p>Updated <b>2024-09-01T10:01:46+00:00</b></p>
+    <p>Updated <b>2024-09-02T07:28:50+00:00</b></p>
+
+    <input type="text" id="searchInput" onkeyup="searchName()" placeholder="Search for names..">
 
 </div>
-<table border="0" cellpadding="4" cellspacing="0" class="hiscore_table">
+<table id="scoretable" border="0" cellpadding="4" cellspacing="0" class="hiscore_table">
 <thead>
 <tr>
 <th>-+</th><th>#</th><th>(#)</th><th>NAME</th><th>NEW</th><th>DIFF</th><th>OLD</th><th>COUNTRY</th></tr>
@@ -360,7 +362,7 @@
 <tr>
 <td><nobr class="up">+180</nobr></td><td>150</td><td>330</td><td>Patricier</td><td>7145</td><td>3%</td><td>184990</td><td><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></td></tr>
 <tr>
-<td><nobr class="up">+2912</nobr></td><td>151</td><td>3063</td><td>ChrisWild</td><td>7030</td><td>39%</td><td>17664</td><td><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></td></tr>
+<td><nobr class="up">+2912</nobr></td><td>151</td><td>3063</td><td>Chrisjw</td><td>7030</td><td>39%</td><td>17664</td><td><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></td></tr>
 <tr>
 <td><nobr class="down">-30</nobr></td><td>152</td><td>122</td><td>Mr__Noodle</td><td>7020</td><td>2%</td><td>280833</td><td><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></td></tr>
 <tr>
@@ -600,7 +602,7 @@
 <tr>
 <td><nobr class="up">+262</nobr></td><td>270</td><td>532</td><td>Spiken</td><td>4839</td><td>3%</td><td>137699</td><td><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></td></tr>
 <tr>
-<td><nobr class="up">+558</nobr></td><td>271</td><td>829</td><td>BajenOnAWalk</td><td>4812</td><td>4%</td><td>102087</td><td><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></td></tr>
+<td><nobr class="up">+558</nobr></td><td>271</td><td>829</td><td>BajenOnBike</td><td>4812</td><td>4%</td><td>102087</td><td><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></td></tr>
 <tr>
 <td><nobr class="up">+888</nobr></td><td>272</td><td>1160</td><td>Alfonsa</td><td>4805</td><td>6%</td><td>75129</td><td><img src="https://flagcdn.com/h20/dk.png" height="20" alt="dk"></td></tr>
 <tr>
@@ -2458,7 +2460,7 @@
 <tr>
 <td><nobr class="up">+1905</nobr></td><td>1199</td><td>3104</td><td>Harmelott</td><td>1019</td><td>5%</td><td>17132</td><td><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></td></tr>
 <tr>
-<td><nobr class="up">+261</nobr></td><td>1200</td><td>1461</td><td>Hepatica</td><td>1017</td><td>1%</td><td>58855</td><td><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></td></tr>
+<td><nobr class="up">+261</nobr></td><td>1200</td><td>1461</td><td>hepatica</td><td>1017</td><td>1%</td><td>58855</td><td><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></td></tr>
 <tr>
 <td><nobr class="up">+1492</nobr></td><td>1201</td><td>2693</td><td>Schotte</td><td>1016</td><td>4%</td><td>23796</td><td><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></td></tr>
 <tr>
@@ -4060,8 +4062,31 @@
 <tr>
 <td><nobr class="up">+1484</nobr></td><td>2000</td><td>3484</td><td>Turfsnaggy</td><td>400</td><td>3%</td><td>12643</td><td><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></td></tr>
 </tbody>
-</table>            </div>
+</table>        </div>
         <!--</div>-->
 
+
+        <script>
+            function searchName() {
+                // Declare variables
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("searchInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("scoretable");
+                tr = table.getElementsByTagName("tr");
+
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[3];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>
