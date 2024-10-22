@@ -32,12 +32,24 @@
         <div style="padding-left:5px;">
             
 <style>
-.hiscore_alignment_original td:nth-child(1) {
-    text-align: left !important;
+.hiscore_table td:nth-child(1) {
+    text-align: right;
 }
-.hiscore_alignment_original td:nth-child(4,5,6) {
+.hiscore_table td:nth-child(2) {
+    text-align: left;
+}
+.hiscore_table td:nth-child(4) {
     text-align: right;
 }    
+.hiscore_table td:nth-child(5) {
+    text-align: right;
+}    
+.hiscore_table td:nth-child(6) {
+    text-align: right;
+}
+.hiscore_table th {
+    text-align: center;
+}
 </style>
     
 <div style="max-width: 700px">
@@ -52,7 +64,7 @@
     <p>Columns left to right: [Placement], [Name], [Score], [Distance traveled], [Hours turfed], [Average speed]. 
     </p>
 
-    <p>Updated <b>2024-10-22T08:35:50+00:00</b></p>
+    <p>Updated <b>2024-10-22T08:38:50+00:00</b></p>
 
     <input type="text" id="searchInput" onkeyup="searchName()" placeholder="Search for names..">
 
