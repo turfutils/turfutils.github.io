@@ -52,9 +52,9 @@
         [Turfplace], [Name], [EQscore], [% diff], [Turfscore]. 
     </p>
 
-    <p>Updated <b>2024-10-17T16:01:11+00:00</b></p>
+    <p>Updated <b>2024-10-23T12:25:44+00:00</b></p>
 
-    <input type="text" id="searchInput" onkeyup="searchName()" placeholder="Search for names..">
+    <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
 </div>
 <table id="scoretable" border="0" cellpadding="4" cellspacing="0" class="hiscore_table sortable-theme-bootstrap" data-sortable>
@@ -64,16 +64,16 @@
 </thead>
 <tbody>
 <tr>
-<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=Palatino" target="_blank" rel="noopener noreferrer">Palatino</a></td><td>64402</td><td>89%</td><td>71821</td><td><a href="https://turf.mitt.land/profile/Palatino" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Rheinland-Pfalz</td></tr>
+<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=ResAnne" target="_blank" rel="noopener noreferrer">ResAnne</a></td><td>10709</td><td>50%</td><td>21396</td><td><a href="https://turf.mitt.land/profile/ResAnne" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Rheinland-Pfalz</td></tr>
 <tr>
-<td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=krombe" target="_blank" rel="noopener noreferrer">krombe</a></td><td>45217</td><td>87%</td><td>51894</td><td><a href="https://turf.mitt.land/profile/krombe" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Rheinland-Pfalz</td></tr>
+<td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=AnneBer" target="_blank" rel="noopener noreferrer">AnneBer</a></td><td>9187</td><td>45%</td><td>20101</td><td><a href="https://turf.mitt.land/profile/AnneBer" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Rheinland-Pfalz</td></tr>
 </tbody>
 </table>        </div>
         <!--</div>-->
 
 
         <script>
-            function searchName() {
+            function searchName(col=3) {
                 // Declare variables
                 var input, filter, table, tr, td, i, txtValue;
                 input = document.getElementById("searchInput");
@@ -82,7 +82,7 @@
                 tr = table.getElementsByTagName("tr");
 
                 for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[3];
+                    td = tr[i].getElementsByTagName("td")[col];
                     if (td) {
                         txtValue = td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
