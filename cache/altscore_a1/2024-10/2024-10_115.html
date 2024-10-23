@@ -52,9 +52,9 @@
         [Turfplace], [Name], [EQscore], [% diff], [Turfscore]. 
     </p>
 
-    <p>Updated <b>2024-10-23T11:34:38+00:00</b></p>
+    <p>Updated <b>2024-10-23T12:01:06+00:00</b></p>
 
-    <input type="text" id="searchInput" onkeyup="searchName()" placeholder="Search for names..">
+    <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
 </div>
 <table id="scoretable" border="0" cellpadding="4" cellspacing="0" class="hiscore_table sortable-theme-bootstrap" data-sortable>
@@ -66,14 +66,14 @@
 <tr>
 <td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=LysMara" target="_blank" rel="noopener noreferrer">LysMara</a></td><td>4310</td><td>31%</td><td>13888</td><td><a href="https://turf.mitt.land/profile/LysMara" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/nl.png" height="20" alt="nl"></a></td><td>Overijssel</td></tr>
 <tr>
-<td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=nonnie" target="_blank" rel="noopener noreferrer">nonnie</a></td><td>1306</td><td>24%</td><td>5325</td><td><a href="https://turf.mitt.land/profile/nonnie" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/nl.png" height="20" alt="nl"></a></td><td>Overijssel</td></tr>
+<td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=nonnie" target="_blank" rel="noopener noreferrer">nonnie</a></td><td>1306</td><td>24%</td><td>5338</td><td><a href="https://turf.mitt.land/profile/nonnie" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/nl.png" height="20" alt="nl"></a></td><td>Overijssel</td></tr>
 </tbody>
 </table>        </div>
         <!--</div>-->
 
 
         <script>
-            function searchName() {
+            function searchName(col=3) {
                 // Declare variables
                 var input, filter, table, tr, td, i, txtValue;
                 input = document.getElementById("searchInput");
@@ -82,7 +82,7 @@
                 tr = table.getElementsByTagName("tr");
 
                 for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[3];
+                    td = tr[i].getElementsByTagName("td")[col];
                     if (td) {
                         txtValue = td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {

@@ -52,9 +52,9 @@
         [Turfplace], [Name], [EQscore], [% diff], [Turfscore]. 
     </p>
 
-    <p>Updated <b>2024-10-23T11:34:44+00:00</b></p>
+    <p>Updated <b>2024-10-23T12:01:10+00:00</b></p>
 
-    <input type="text" id="searchInput" onkeyup="searchName()" placeholder="Search for names..">
+    <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
 </div>
 <table id="scoretable" border="0" cellpadding="4" cellspacing="0" class="hiscore_table sortable-theme-bootstrap" data-sortable>
@@ -66,11 +66,11 @@
 <tr>
 <td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=Pest" target="_blank" rel="noopener noreferrer">Pest</a></td><td>52470</td><td>35%</td><td>148380</td><td><a href="https://turf.mitt.land/profile/Pest" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Yorkshire & The Humber</td></tr>
 <tr>
-<td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=farnsbarns" target="_blank" rel="noopener noreferrer">farnsbarns</a></td><td>37821</td><td>32%</td><td>115296</td><td><a href="https://turf.mitt.land/profile/farnsbarns" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Yorkshire & The Humber</td></tr>
+<td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=farnsbarns" target="_blank" rel="noopener noreferrer">farnsbarns</a></td><td>38249</td><td>32%</td><td>116015</td><td><a href="https://turf.mitt.land/profile/farnsbarns" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Yorkshire & The Humber</td></tr>
 <tr>
-<td>-</td><td>3</td><td>3</td><td><a href="https://frut.zundin.se/user_round.php?userid=Pootle" target="_blank" rel="noopener noreferrer">Pootle</a></td><td>24508</td><td>37%</td><td>65577</td><td><a href="https://turf.mitt.land/profile/Pootle" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Yorkshire & The Humber</td></tr>
+<td>-</td><td>3</td><td>3</td><td><a href="https://frut.zundin.se/user_round.php?userid=Pootle" target="_blank" rel="noopener noreferrer">Pootle</a></td><td>25028</td><td>37%</td><td>67154</td><td><a href="https://turf.mitt.land/profile/Pootle" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Yorkshire & The Humber</td></tr>
 <tr>
-<td>-</td><td>4</td><td>4</td><td><a href="https://frut.zundin.se/user_round.php?userid=Suilven" target="_blank" rel="noopener noreferrer">Suilven</a></td><td>19751</td><td>38%</td><td>51688</td><td><a href="https://turf.mitt.land/profile/Suilven" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Yorkshire & The Humber</td></tr>
+<td>-</td><td>4</td><td>4</td><td><a href="https://frut.zundin.se/user_round.php?userid=Suilven" target="_blank" rel="noopener noreferrer">Suilven</a></td><td>19852</td><td>37%</td><td>52690</td><td><a href="https://turf.mitt.land/profile/Suilven" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Yorkshire & The Humber</td></tr>
 <tr>
 <td><nobr class="up">+1</nobr></td><td>5</td><td>6</td><td><a href="https://frut.zundin.se/user_round.php?userid=terribletim" target="_blank" rel="noopener noreferrer">terribletim</a></td><td>13040</td><td>37%</td><td>34641</td><td><a href="https://turf.mitt.land/profile/terribletim" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Yorkshire & The Humber</td></tr>
 <tr>
@@ -117,7 +117,7 @@
 
 
         <script>
-            function searchName() {
+            function searchName(col=3) {
                 // Declare variables
                 var input, filter, table, tr, td, i, txtValue;
                 input = document.getElementById("searchInput");
@@ -126,7 +126,7 @@
                 tr = table.getElementsByTagName("tr");
 
                 for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[3];
+                    td = tr[i].getElementsByTagName("td")[col];
                     if (td) {
                         txtValue = td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {

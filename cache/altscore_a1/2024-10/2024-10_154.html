@@ -52,9 +52,9 @@
         [Turfplace], [Name], [EQscore], [% diff], [Turfscore]. 
     </p>
 
-    <p>Updated <b>2024-10-23T11:34:43+00:00</b></p>
+    <p>Updated <b>2024-10-23T12:01:09+00:00</b></p>
 
-    <input type="text" id="searchInput" onkeyup="searchName()" placeholder="Search for names..">
+    <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
 </div>
 <table id="scoretable" border="0" cellpadding="4" cellspacing="0" class="hiscore_table sortable-theme-bootstrap" data-sortable>
@@ -80,14 +80,14 @@
 <tr>
 <td>-</td><td>8</td><td>8</td><td><a href="https://frut.zundin.se/user_round.php?userid=MrGrass" target="_blank" rel="noopener noreferrer">MrGrass</a></td><td>100</td><td>42%</td><td>237</td><td><a href="https://turf.mitt.land/profile/MrGrass" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/.png" height="20" alt=""></a></td><td>France</td></tr>
 <tr>
-<td>-</td><td>9</td><td>9</td><td><a href="https://frut.zundin.se/user_round.php?userid=mulino75" target="_blank" rel="noopener noreferrer">mulino75</a></td><td>100</td><td>53%</td><td>186</td><td><a href="https://turf.mitt.land/profile/mulino75" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/.png" height="20" alt=""></a></td><td>France</td></tr>
+<td>-</td><td>9</td><td>9</td><td><a href="https://frut.zundin.se/user_round.php?userid=mulino75" target="_blank" rel="noopener noreferrer">mulino75</a></td><td>100</td><td>53%</td><td>187</td><td><a href="https://turf.mitt.land/profile/mulino75" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/.png" height="20" alt=""></a></td><td>France</td></tr>
 </tbody>
 </table>        </div>
         <!--</div>-->
 
 
         <script>
-            function searchName() {
+            function searchName(col=3) {
                 // Declare variables
                 var input, filter, table, tr, td, i, txtValue;
                 input = document.getElementById("searchInput");
@@ -96,7 +96,7 @@
                 tr = table.getElementsByTagName("tr");
 
                 for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[3];
+                    td = tr[i].getElementsByTagName("td")[col];
                     if (td) {
                         txtValue = td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {

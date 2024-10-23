@@ -52,9 +52,9 @@
         [Turfplace], [Name], [EQscore], [% diff], [Turfscore]. 
     </p>
 
-    <p>Updated <b>2024-10-23T11:34:46+00:00</b></p>
+    <p>Updated <b>2024-10-23T12:01:12+00:00</b></p>
 
-    <input type="text" id="searchInput" onkeyup="searchName()" placeholder="Search for names..">
+    <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
 </div>
 <table id="scoretable" border="0" cellpadding="4" cellspacing="0" class="hiscore_table sortable-theme-bootstrap" data-sortable>
@@ -66,7 +66,7 @@
 <tr>
 <td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=eMKay" target="_blank" rel="noopener noreferrer">eMKay</a></td><td>9697</td><td>45%</td><td>21218</td><td><a href="https://turf.mitt.land/profile/eMKay" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Niedersachsen</td></tr>
 <tr>
-<td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=uschDibb" target="_blank" rel="noopener noreferrer">uschDibb</a></td><td>1100</td><td>27%</td><td>4031</td><td><a href="https://turf.mitt.land/profile/uschDibb" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Niedersachsen</td></tr>
+<td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=uschDibb" target="_blank" rel="noopener noreferrer">uschDibb</a></td><td>1200</td><td>23%</td><td>5014</td><td><a href="https://turf.mitt.land/profile/uschDibb" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Niedersachsen</td></tr>
 <tr>
 <td>-</td><td>3</td><td>3</td><td><a href="https://frut.zundin.se/user_round.php?userid=Bikefolder" target="_blank" rel="noopener noreferrer">Bikefolder</a></td><td>100</td><td>42%</td><td>237</td><td><a href="https://turf.mitt.land/profile/Bikefolder" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Niedersachsen</td></tr>
 <tr>
@@ -77,7 +77,7 @@
 
 
         <script>
-            function searchName() {
+            function searchName(col=3) {
                 // Declare variables
                 var input, filter, table, tr, td, i, txtValue;
                 input = document.getElementById("searchInput");
@@ -86,7 +86,7 @@
                 tr = table.getElementsByTagName("tr");
 
                 for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[3];
+                    td = tr[i].getElementsByTagName("td")[col];
                     if (td) {
                         txtValue = td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {

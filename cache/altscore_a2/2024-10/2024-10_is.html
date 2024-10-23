@@ -52,9 +52,9 @@
         [Turfplace], [Name], [EQscore], [% diff], [Turfscore]. 
     </p>
 
-    <p>Updated <b>2024-10-23T11:34:37+00:00</b></p>
+    <p>Updated <b>2024-10-23T12:01:06+00:00</b></p>
 
-    <input type="text" id="searchInput" onkeyup="searchName()" placeholder="Search for names..">
+    <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
 </div>
 <table id="scoretable" border="0" cellpadding="4" cellspacing="0" class="hiscore_table sortable-theme-bootstrap" data-sortable>
@@ -66,7 +66,7 @@
 <tr>
 <td><nobr class="up">+1</nobr></td><td>1</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=Thant" target="_blank" rel="noopener noreferrer">Thant</a></td><td>8912</td><td>64%</td><td>13826</td><td><a href="https://turf.mitt.land/profile/Thant" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/is.png" height="20" alt="is"></a></td><td>Reykjavík</td></tr>
 <tr>
-<td><nobr class="down">-1</nobr></td><td>2</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=allinug" target="_blank" rel="noopener noreferrer">allinug</a></td><td>6141</td><td>31%</td><td>19205</td><td><a href="https://turf.mitt.land/profile/allinug" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/is.png" height="20" alt="is"></a></td><td>Dreifbýli</td></tr>
+<td><nobr class="down">-1</nobr></td><td>2</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=allinug" target="_blank" rel="noopener noreferrer">allinug</a></td><td>6141</td><td>31%</td><td>19250</td><td><a href="https://turf.mitt.land/profile/allinug" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/is.png" height="20" alt="is"></a></td><td>Dreifbýli</td></tr>
 <tr>
 <td>-</td><td>3</td><td>3</td><td><a href="https://frut.zundin.se/user_round.php?userid=K56" target="_blank" rel="noopener noreferrer">K56</a></td><td>3833</td><td>55%</td><td>6901</td><td><a href="https://turf.mitt.land/profile/K56" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/is.png" height="20" alt="is"></a></td><td>Reykjavík</td></tr>
 </tbody>
@@ -75,7 +75,7 @@
 
 
         <script>
-            function searchName() {
+            function searchName(col=3) {
                 // Declare variables
                 var input, filter, table, tr, td, i, txtValue;
                 input = document.getElementById("searchInput");
@@ -84,7 +84,7 @@
                 tr = table.getElementsByTagName("tr");
 
                 for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[3];
+                    td = tr[i].getElementsByTagName("td")[col];
                     if (td) {
                         txtValue = td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
