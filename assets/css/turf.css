@@ -7,15 +7,20 @@
     font-size: 20px;
     color: #CC0;
     background-color: #330;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 .hiscore_table td {
     font-family: monospace;
     font-size: 20px;
     text-align: right;
+    z-index: 0;
 }
 
 .up {color: #0A0; }
 .down {color: #F50; }
+.gray {color: #000; }
 
 .hiscore_table td:nth-child(4) {
     text-align: left;
