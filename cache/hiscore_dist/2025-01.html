@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <title>Turf original scoring</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- Mobile Specific Metas
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- FONT
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+        <!-- CSS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/barebones.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/turf.css" rel="stylesheet" type="text/css" />
+        
+                <script src="/assets/js/sortable.min.js"></script>
+                
+        <link rel="icon" type="image/png" href="assets/img/favicon-16.png">
+
+    </head>
+    <body>
+
+        <!--<div class="grid-container halves">-->
+        <div style="padding-left:5px;">
+            
+<style>
+.hiscore_table td:nth-child(1) {
+    text-align: right;
+}
+.hiscore_table td:nth-child(2) {
+    text-align: left;
+}
+.hiscore_table td:nth-child(4) {
+    text-align: right;
+}    
+.hiscore_table td:nth-child(5) {
+    text-align: right;
+}    
+.hiscore_table td:nth-child(6) {
+    text-align: right;
+}
+.hiscore_table th {
+    text-align: center;
+}
+</style>
+    
+<div style="max-width: 700px">
+    <h1>Turf original scoring</h1>
+
+    <h2>Round 2025-01</h2>
+    <p>
+        <a href="2024-12.html">&lt;&lt; 2024-12</a> --- 
+        <a href="2025-02.html">2025-02 &gt;&gt;</a>
+    </p>
+
+    <p>Columns left to right: [Placement], [Name], [Score], [Distance traveled in km], [Hours turfed], [Average speed], [Points/km]. 
+    </p>
+
+    <p>Updated <b>2025-01-05T11:30:07+00:00</b></p>
+
+    <input type="text" id="searchInput" onkeyup="searchName(1)" placeholder="Search for names..">
+
+</div>
+<table id="scoretable" border="0" cellpadding="4" cellspacing="0" class="hiscore_table sortable-theme-bootstrap" data-sortable>
+<thead>
+<tr>
+<th>#</th><th>NAME</th><th>SCORE</th><th>Km</th><th>H</th><th>Km/h</th><th>P/km</th><th>COUNTRY</th><th>AREA</th></tr>
+</thead>
+</table>        </div>
+        <!--</div>-->
+
+
+        <script>
+            function searchName(col=3) {
+                // Declare variables
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("searchInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("scoretable");
+                tr = table.getElementsByTagName("tr");
+
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[col];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+
+
+        </script>
+    </body>
+</html>
