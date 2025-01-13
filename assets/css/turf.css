@@ -1,12 +1,19 @@
-.hiscore_table {
+h1 {
+    color: #FF0;
+}
+h2, h3 {
+    color: #FC0;
+}
+
+table {
     padding-top: 20px;
 }
 
-.hiscore_table tr:nth-child(even) {
+table tr:nth-child(even) {
     background-color: #040;
 }
 
-.hiscore_table th {
+table th {
     font-family: monospace;
     font-size: 20px;
     color: #CC0;
@@ -15,7 +22,7 @@
     top: 0;
     z-index: 1;
 }
-.hiscore_table td {
+table td {
     font-family: monospace;
     font-size: 20px;
     text-align: right;
@@ -75,6 +82,15 @@ input {
         display:none;
     }
     .hiscore_table td:nth-child(7), .hiscore_table th:nth-child(7){
+        display:none;
+    }
+    .hiscore_table td:nth-child(10), .hiscore_table th:nth-child(10){
+        display:none;
+    }
+    .hiscore_table td:nth-child(11), .hiscore_table th:nth-child(11){
+        display:none;
+    }
+    .hiscore_table td:nth-child(12), .hiscore_table th:nth-child(12){
         display:none;
     }
 }
