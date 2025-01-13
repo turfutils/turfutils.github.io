@@ -1,0 +1,69 @@
+<html>
+    <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <meta name="generator" content="">
+      <title>Turf Utils</title>
+      <!-- https://css.winterveil.net/ classless css: -->
+      <link rel="stylesheet" href="https://unpkg.com/normalize.css">
+      <link rel="stylesheet" href="https://unpkg.com/magick.css">
+      <script src="/assets/js/sortable.min.js"></script>
+      <script src="/assets/js/utils.js"></script>
+
+      <style>
+        header {
+          margin-bottom: 2em;
+        }
+        li {
+          margin-bottom: 1em;
+        }
+
+        .typography-columns {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px; /* Adjust the space between columns as needed */
+        }
+
+        .typography-columns > div {
+          flex: 1; /* Allows each child div to grow equally */
+          min-width: 250px; /* Prevents the columns from getting too narrow before stacking */
+        }
+
+        @media (max-width: 600px) {
+          .typography-columns {
+            flex-direction: column;
+          }
+        }
+
+        @media (prefers-color-scheme: dark) {
+          header nav ul li img {
+            filter: invert(1);
+          }
+        }
+      </style>      
+    </head>
+    <body>
+        <main>
+            <header>
+                <h1>Turf utils</h1>
+            </header>
+
+            <section>
+                <h2>Turf EQualized scoring</h2>
+                
+                
+                <p>Unofficial scoring systems for <a href="https://www.turfgame.com">Turfgame.com</a>. </p>
+                
+                <p>The first one evens out the score by giving the same points for the same work. You get a bonus for taking a lot of zones the last 24 hours. </p>
+                
+                <p>List two has a max roof of one million points. You get bonus for how many zones you have taken this round and how many of them were unique. You also get a bonus for number of kilometers traveled. Sorry, plane rides do not count. &#128513;</p>
+                
+                <p>None of the lists give any points for holding zones. Revisit counts as normal takeover.</p>
+                
+                <ol>
+                    <li><a href="https://turfutils.github.io/cache/altscore_a2/2025-01.html">Twenty4 hour rush</a></li>
+                    <li><a href="https://turfutils.github.io/cache/altscore_b/2025-01.html">Turf a Million</a></li>
+                </ol>
+            </section>
+        </main>
+    </body>
+</html>
