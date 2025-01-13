@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <title>Turf example scores</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- Mobile Specific Metas
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- FONT
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+        <!-- CSS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="http://127.0.0.1/turf/assets/css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="http://127.0.0.1/turf/assets/css/barebones.css" rel="stylesheet" type="text/css" />
+        <link href="http://127.0.0.1/turf/assets/css/turf.css" rel="stylesheet" type="text/css" />
+        
+                <script src="http://localhost/turf/assets/js/sortable.min.js"></script>
+        <script src="http://localhost/turf/assets/js/utils.js"></script>
+                
+        <link rel="icon" type="image/png" href="assets/img/favicon-16.png">
+
+    </head>
+    <body>
+
+        <div class="grid-container full">
+            <div>
+                <h1>Example points for the lists</h1><p>This is how to read the lists:<br> If I take <b>(first column)</b> takes total and <b>(second column)</b> takes per day I get <b>(third column)</b> points per take (ppt). So if you have taken 500 zones after one week, and the last day you take 25 zones, the next 24 hours you will get 129 ppt. If you manage to take 50 zones this day, you will get 139 per zone the next day. If you now skip one day you will lose the daily bonus but you will keep your total taken zones bonus of 115 ppt for the next day.</p>            </div>
+        </div>
+        <div class="grid-container thirds">
+            <div>
+                <h3>EQualized scoring</h3><p>In this list it's a bit easier to get max bonus points per zone.</p><table border="0" cellpadding="4" cellspacing="0" class="" style="width:100%;">
+<thead>
+<tr>
+<th>TAKES</th><th>DAILY</th><th>=</th><th>PER ZONE</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>500</td><td>25</td><td>=</td><td>129</td></tr>
+<tr>
+<td>525</td><td>50</td><td>=</td><td>139</td></tr>
+<tr>
+<td>575</td><td>0</td><td>=</td><td>115</td></tr>
+<tr>
+<td>1000</td><td>50</td><td>=</td><td>150</td></tr>
+<tr>
+<td>1000</td><td>150</td><td>=</td><td>167</td></tr>
+<tr>
+<td>2000</td><td>100</td><td>=</td><td>175</td></tr>
+<tr>
+<td>2000</td><td>200</td><td>=</td><td>184</td></tr>
+<tr>
+<td>4000</td><td>200</td><td>=</td><td>193</td></tr>
+<tr>
+<td>8000</td><td>400</td><td>=</td><td>199</td></tr>
+<tr>
+<td>16000</td><td>800</td><td>=</td><td>199</td></tr>
+</tbody>
+</table>            </div>
+            <div>
+                <h3>Twenty4 hour rush!</h3><p>This is a harder version of EQualized score where you need more takes to get a bonus.</p><table border="0" cellpadding="4" cellspacing="0" class="" style="width:100%;">
+<thead>
+<tr>
+<th>TAKES</th><th>DAILY</th><th>=</th><th>PER ZONE</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>500</td><td>25</td><td>=</td><td>108</td></tr>
+<tr>
+<td>525</td><td>50</td><td>=</td><td>112</td></tr>
+<tr>
+<td>575</td><td>0</td><td>=</td><td>104</td></tr>
+<tr>
+<td>1000</td><td>50</td><td>=</td><td>115</td></tr>
+<tr>
+<td>1000</td><td>150</td><td>=</td><td>127</td></tr>
+<tr>
+<td>2000</td><td>100</td><td>=</td><td>129</td></tr>
+<tr>
+<td>2000</td><td>200</td><td>=</td><td>139</td></tr>
+<tr>
+<td>4000</td><td>200</td><td>=</td><td>150</td></tr>
+<tr>
+<td>8000</td><td>400</td><td>=</td><td>175</td></tr>
+<tr>
+<td>16000</td><td>800</td><td>=</td><td>193</td></tr>
+</tbody>
+</table>            </div>
+            <div>
+                <h3>Turf a Million</h3><p>This list is a bit different. Here you get the last column as your total score. Bonus is dependent on three things, how many takes total, how far traveled total and how many round-unique zones you took during the round.</p><table border="0" cellpadding="4" cellspacing="0" class="" style="width:100%;">
+<thead>
+<tr>
+<th>TAKES</th><th>Km</th><th>UNIQUE</th><th>TOTAL SCORE</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>500</td><td>200</td><td>100</td><td>60576</td></tr>
+<tr>
+<td>500</td><td>200</td><td>200</td><td>77425</td></tr>
+<tr>
+<td>800</td><td>300</td><td>400</td><td>130499</td></tr>
+<tr>
+<td>1000</td><td>500</td><td>500</td><td>168839</td></tr>
+<tr>
+<td>1500</td><td>1000</td><td>1000</td><td>283298</td></tr>
+<tr>
+<td>2000</td><td>1000</td><td>1500</td><td>346331</td></tr>
+<tr>
+<td>4000</td><td>2000</td><td>1500</td><td>476003</td></tr>
+<tr>
+<td>8000</td><td>4000</td><td>2000</td><td>673350</td></tr>
+<tr>
+<td>16000</td><td>8000</td><td>4000</td><td>889998</td></tr>
+<tr>
+<td>70000</td><td>50000</td><td>20000</td><td>999989</td></tr>
+</tbody>
+</table>            </div>
+        </div>
+
+
+
+    </body>
+</html>
