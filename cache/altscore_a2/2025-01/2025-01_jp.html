@@ -20,10 +20,10 @@
         <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/barebones.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/turf.css" rel="stylesheet" type="text/css" />
-        
+
                 <script src="/assets/js/sortable.min.js"></script>
         <script src="/assets/js/utils.js"></script>
-                
+        
         <link rel="icon" type="image/png" href="assets/img/favicon-16.png">
 
     </head>
@@ -53,7 +53,7 @@
             Explanation and examples of score calculations.</a>
     </p>
 
-    <p>Updated <b>2025-01-18T22:00:16+00:00</b></p>
+    <p>Updated <b><span class="datestamp">2025-01-18T22:30:16+00:00</span></b></p>
 
     <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
@@ -82,7 +82,7 @@
 
 
         <script>
-            function searchName(col=3) {
+            function searchName(col = 3) {
                 // Declare variables
                 var input, filter, table, tr, td, i, txtValue;
                 input = document.getElementById("searchInput");
@@ -100,11 +100,43 @@
                             tr[i].style.display = "none";
                         }
                     }
-                }
+            }
             }
 
+            /* --------------------------
+             * Convert all span elements with class "datestamp" to local timezone for user:
+             */
+            const datestampElements = document.querySelectorAll('span.datestamp');
 
+            datestampElements.forEach((element) => {
+                const datestampText = element.textContent;
 
+                try {
+                    const date = new Date(datestampText);
+
+                    // Check if the date is valid
+                    if (isNaN(date)) {
+                        throw new Error("Invalid date format");
+                    }
+
+                    // Format the date as YYYY-MM-DD
+                    const formattedDate = date.toLocaleDateString("sv-SE"); // "sv-SE" uses ISO 8601 format (YYYY-MM-DD)
+
+                    // Format the time as HH:mm:ss
+                    const formattedTime = date.toLocaleTimeString("sv-SE", {
+                        hour12: false, // 24-hour format
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                    });
+                    const formattedDateTime = `${formattedDate}T${formattedTime}`;
+
+                    // Update the text content of the element
+                    element.textContent = formattedDateTime + ' (local time)';
+                } catch (error) {
+                    console.error(`Error processing date for element: ${datestampText}`, error.message);
+                }
+            });
         </script>
     </body>
 </html>
