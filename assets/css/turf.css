@@ -39,10 +39,10 @@ table td {
     color: #000;
 }
 
-.hiscore_table td:nth-child(4) {
+.hiscore_table.resp-table td:nth-child(4) {
     text-align: left;
 }
-.hiscore_table td:nth-child(8) {
+.hiscore_table.resp-table td:nth-child(8) {
     text-align: center;
 }
 
@@ -51,76 +51,76 @@ input {
 }
 
 @media screen and (max-width: 1225px) and (min-width: 1045px) {
-    .hiscore_table td:nth-child(3), .hiscore_table th:nth-child(3){
+    .hiscore_table.resp-table td:nth-child(3), .hiscore_table.resp-table th:nth-child(3){
         display:none;
     }
-    .hiscore_table td:nth-child(6), .hiscore_table th:nth-child(6){
+    .hiscore_table.resp-table td:nth-child(6), .hiscore_table.resp-table th:nth-child(6){
         display:none;
     }
 }
 
 @media screen and (max-width: 1045px) and (min-width: 835px) {
-    .hiscore_table td:nth-child(1), .hiscore_table th:nth-child(1){
+    .hiscore_table.resp-table td:nth-child(1), .hiscore_table.resp-table th:nth-child(1){
         display:none;
     }
-    .hiscore_table td:nth-child(3), .hiscore_table th:nth-child(3){
+    .hiscore_table.resp-table td:nth-child(3), .hiscore_table.resp-table th:nth-child(3){
         display:none;
     }
-    .hiscore_table td:nth-child(6), .hiscore_table th:nth-child(6){
+    .hiscore_table.resp-table td:nth-child(6), .hiscore_table.resp-table th:nth-child(6){
         display:none;
     }
 }
 
 @media screen and (max-width: 565px) and (min-width: 300px) {
-    .hiscore_table td:nth-child(1), .hiscore_table th:nth-child(1){
+    .hiscore_table.resp-table td:nth-child(1), .hiscore_table.resp-table th:nth-child(1){
         display:none;
     }
-    .hiscore_table td:nth-child(3), .hiscore_table th:nth-child(3){
+    .hiscore_table.resp-table td:nth-child(3), .hiscore_table.resp-table th:nth-child(3){
         display:none;
     }
-    .hiscore_table td:nth-child(6), .hiscore_table th:nth-child(6){
+    .hiscore_table.resp-table td:nth-child(6), .hiscore_table.resp-table th:nth-child(6){
         display:none;
     }
-    .hiscore_table td:nth-child(7), .hiscore_table th:nth-child(7){
+    .hiscore_table.resp-table td:nth-child(7), .hiscore_table.resp-table th:nth-child(7){
         display:none;
     }
-    .hiscore_table td:nth-child(10), .hiscore_table th:nth-child(10){
+    .hiscore_table.resp-table td:nth-child(10), .hiscore_table.resp-table th:nth-child(10){
         display:none;
     }
-    .hiscore_table td:nth-child(11), .hiscore_table th:nth-child(11){
+    .hiscore_table.resp-table td:nth-child(11), .hiscore_table.resp-table th:nth-child(11){
         display:none;
     }
-    .hiscore_table td:nth-child(12), .hiscore_table th:nth-child(12){
+    .hiscore_table.resp-table td:nth-child(12), .hiscore_table.resp-table th:nth-child(12){
         display:none;
     }
 }
 
 @media screen and (max-width: 300px) {
-    .hiscore_table td:nth-child(1), .hiscore_table th:nth-child(1){
+    .hiscore_table.resp-table td:nth-child(1), .hiscore_table.resp-table th:nth-child(1){
         display:none;
     }
-    .hiscore_table td:nth-child(3), .hiscore_table th:nth-child(3){
+    .hiscore_table.resp-table td:nth-child(3), .hiscore_table.resp-table th:nth-child(3){
         display:none;
     }
-    .hiscore_table td:nth-child(6), .hiscore_table th:nth-child(6){
+    .hiscore_table.resp-table td:nth-child(6), .hiscore_table.resp-table th:nth-child(6){
         display:none;
     }
-    .hiscore_table td:nth-child(7), .hiscore_table th:nth-child(7){
+    .hiscore_table.resp-table td:nth-child(7), .hiscore_table.resp-table th:nth-child(7){
         display:none;
     }
-    .hiscore_table td:nth-child(8), .hiscore_table th:nth-child(8){
+    .hiscore_table.resp-table td:nth-child(8), .hiscore_table.resp-table th:nth-child(8){
         display:none;
     }
-    .hiscore_table td:nth-child(9), .hiscore_table th:nth-child(9){
+    .hiscore_table.resp-table td:nth-child(9), .hiscore_table.resp-table th:nth-child(9){
         display:none;
     }
-    .hiscore_table td:nth-child(10), .hiscore_table th:nth-child(10){
+    .hiscore_table.resp-table td:nth-child(10), .hiscore_table.resp-table th:nth-child(10){
         display:none;
     }
-    .hiscore_table td:nth-child(11), .hiscore_table th:nth-child(11){
+    .hiscore_table.resp-table td:nth-child(11), .hiscore_table.resp-table th:nth-child(11){
         display:none;
     }
-    .hiscore_table td:nth-child(12), .hiscore_table th:nth-child(12){
+    .hiscore_table.resp-table td:nth-child(12), .hiscore_table.resp-table th:nth-child(12){
         display:none;
     }
 }
