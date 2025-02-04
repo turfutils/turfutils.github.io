@@ -28,7 +28,101 @@
 
     </head>
     <body>
+                    <div style="padding-left:5px;">
+                    <div id="select-container">
+        <!-- Select boxes added dynamically here -->
+    </div>
 
+
+    <script>
+        // Store select box structure here:
+        let jsonData = {};
+
+        async function loadSelectBox() {
+            try {
+                const response = await fetch('/cache/area_lists/area_list_altscore_a1.json'); // Load external JSON file
+                jsonData = await response.json();
+                if (jsonData.categories) {
+                    createSelectBox(jsonData.categories, "level-1");
+                }
+            } catch (error) {
+                console.error("Error loading JSON data:", error);
+            }
+        }
+
+        function createSelectBox(data, level) {
+            const container = document.getElementById("select-container");
+
+            // Remove all select boxes beyond this level
+            removeLowerLevels(level);
+
+            // Create a new select box
+            const select = document.createElement("select");
+            select.id = level;
+            select.dataset.level = level;
+            select.innerHTML = '<option value="">Select...</option>';
+
+            data.forEach((entry, index) => {
+                const option = document.createElement("option");
+                option.value = index; // Store index for lookup
+                option.textContent = entry.name;
+                option.dataset.index = index;
+                option.dataset.link = entry.link || ""; // Store link only if it's a leaf node
+                select.appendChild(option);
+            });
+
+            container.appendChild(select);
+
+            // Event listener to handle selection changes
+            select.addEventListener("change", function () {
+                handleSelection(this, data);
+            });
+        }
+
+        function handleSelection(selectElement, data) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const selectedIndex = selectedOption.dataset.index;
+            const selectedLink = selectedOption.dataset.link;
+            const level = selectElement.dataset.level;
+
+            if (!selectedIndex) return;
+
+            const selectedData = data[selectedIndex];
+
+            if (selectedLink) {
+                window.location.href = selectedLink; // Redirect if a link exists
+                return;
+            }
+
+            // Determine next level dynamically
+            const nextLevel = `level-${parseInt(level.split('-')[1]) + 1}`;
+
+            if (selectedData.subcategories) {
+                createSelectBox(selectedData.subcategories, nextLevel);
+            } else if (selectedData.items) {
+                createSelectBox(selectedData.items, nextLevel);
+            }
+        }
+
+        function removeLowerLevels(currentLevel) {
+            const container = document.getElementById("select-container");
+            const currentLevelNumber = parseInt(currentLevel.split('-')[1]);
+
+            // Remove all select elements beyond the current level
+            [...container.children].forEach(select => {
+                const selectLevelNumber = parseInt(select.id.split('-')[1]);
+                if (selectLevelNumber >= currentLevelNumber) {
+                    container.removeChild(select);
+                }
+            });
+        }
+
+        // Load and set up selectbox for country/area:
+        loadSelectBox();
+        
+    </script>
+            </div>
+                
         <!--<div class="grid-container halves">-->
         <div style="padding-left:5px;">
             
@@ -55,7 +149,7 @@
         </p>
     </div>
 
-    <p>Updated <b><span class="datestamp">2025-02-04T17:30:18+00:00</span></b></p>
+    <p>Updated <b><span class="datestamp">2025-02-04T17:45:59+00:00</span></b></p>
 
     <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
@@ -69,7 +163,7 @@
 <tr>
 <td><nobr class="up">+1</nobr></td><td>1</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=PEKOMON&roundid=176" target="_blank" rel="noopener noreferrer">PEKOMON</a></td><td>54050</td><td><nobr class="up">103%</nobr></td><td>52128</td><td><a href="https://turfmedals.com/profile/PEKOMON" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>249</td><td>185</td><td>113</td></tr>
 <tr>
-<td><nobr class="down">-1</nobr></td><td>2</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=Engdod&roundid=176" target="_blank" rel="noopener noreferrer">Engdod</a></td><td>52151</td><td>97%</td><td>53678</td><td><a href="https://turfmedals.com/profile/Engdod" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>277</td><td>161</td><td>111</td></tr>
+<td><nobr class="down">-1</nobr></td><td>2</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=Engdod&roundid=176" target="_blank" rel="noopener noreferrer">Engdod</a></td><td>52151</td><td>97%</td><td>53678</td><td><a href="https://turfmedals.com/profile/Engdod" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>277</td><td>161</td><td>132</td></tr>
 <tr>
 <td>-</td><td>3</td><td>3</td><td><a href="https://frut.zundin.se/user_round.php?userid=vinzon&roundid=176" target="_blank" rel="noopener noreferrer">vinzon</a></td><td>40368</td><td><nobr class="up">114%</nobr></td><td>35260</td><td><a href="https://turfmedals.com/profile/vinzon" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>179</td><td>134</td><td> 87</td></tr>
 <tr>
@@ -115,7 +209,7 @@
 <tr>
 <td>-</td><td>24</td><td>24</td><td><a href="https://frut.zundin.se/user_round.php?userid=TheSeagull&roundid=176" target="_blank" rel="noopener noreferrer">TheSeagull</a></td><td>9921</td><td><nobr class="up">106%</nobr></td><td>9340</td><td><a href="https://turfmedals.com/profile/TheSeagull" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>56</td><td>33</td><td> 17</td></tr>
 <tr>
-<td><nobr class="up">+10</nobr></td><td>25</td><td>35</td><td><a href="https://frut.zundin.se/user_round.php?userid=FiaStia&roundid=176" target="_blank" rel="noopener noreferrer">FiaStia</a></td><td>9708</td><td><nobr class="up">163%</nobr></td><td>5954</td><td><a href="https://turfmedals.com/profile/FiaStia" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>27</td><td>21</td><td> 60</td></tr>
+<td><nobr class="up">+11</nobr></td><td>25</td><td>36</td><td><a href="https://frut.zundin.se/user_round.php?userid=FiaStia&roundid=176" target="_blank" rel="noopener noreferrer">FiaStia</a></td><td>9708</td><td><nobr class="up">163%</nobr></td><td>5954</td><td><a href="https://turfmedals.com/profile/FiaStia" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>27</td><td>21</td><td> 60</td></tr>
 <tr>
 <td><nobr class="up">+4</nobr></td><td>26</td><td>30</td><td><a href="https://frut.zundin.se/user_round.php?userid=lexa&roundid=176" target="_blank" rel="noopener noreferrer">lexa</a></td><td>9475</td><td><nobr class="up">120%</nobr></td><td>7852</td><td><a href="https://turfmedals.com/profile/lexa" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>43</td><td>36</td><td>  9</td></tr>
 <tr>
@@ -133,21 +227,21 @@
 <tr>
 <td><nobr class="down">-7</nobr></td><td>33</td><td>26</td><td><a href="https://frut.zundin.se/user_round.php?userid=Suzzo&roundid=176" target="_blank" rel="noopener noreferrer">Suzzo</a></td><td>7024</td><td>77%</td><td>9102</td><td><a href="https://turfmedals.com/profile/Suzzo" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>31</td><td>29</td><td> 12</td></tr>
 <tr>
-<td>-</td><td>34</td><td>34</td><td><a href="https://frut.zundin.se/user_round.php?userid=TheMadMats&roundid=176" target="_blank" rel="noopener noreferrer">TheMadMats</a></td><td>7008</td><td><nobr class="up">117%</nobr></td><td>5958</td><td><a href="https://turfmedals.com/profile/TheMadMats" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>36</td><td>20</td><td> 19</td></tr>
+<td><nobr class="up">+1</nobr></td><td>34</td><td>35</td><td><a href="https://frut.zundin.se/user_round.php?userid=TheMadMats&roundid=176" target="_blank" rel="noopener noreferrer">TheMadMats</a></td><td>7008</td><td><nobr class="up">117%</nobr></td><td>5958</td><td><a href="https://turfmedals.com/profile/TheMadMats" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>36</td><td>20</td><td> 19</td></tr>
 <tr>
 <td><nobr class="down">-2</nobr></td><td>35</td><td>33</td><td><a href="https://frut.zundin.se/user_round.php?userid=Ingria&roundid=176" target="_blank" rel="noopener noreferrer">Ingria</a></td><td>6943</td><td><nobr class="up">104%</nobr></td><td>6620</td><td><a href="https://turfmedals.com/profile/Ingria" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>40</td><td>23</td><td>  8</td></tr>
 <tr>
-<td><nobr class="up">+10</nobr></td><td>36</td><td>46</td><td><a href="https://frut.zundin.se/user_round.php?userid=Magister_R&roundid=176" target="_blank" rel="noopener noreferrer">Magister_R</a></td><td>6141</td><td><nobr class="up">124%</nobr></td><td>4941</td><td><a href="https://turfmedals.com/profile/Magister_R" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>28</td><td>22</td><td> 10</td></tr>
+<td><nobr class="down">-2</nobr></td><td>36</td><td>34</td><td><a href="https://frut.zundin.se/user_round.php?userid=frigga7&roundid=176" target="_blank" rel="noopener noreferrer">frigga7</a></td><td>6666</td><td><nobr class="up">106%</nobr></td><td>6270</td><td><a href="https://turfmedals.com/profile/frigga7" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>35</td><td>22</td><td>  9</td></tr>
 <tr>
-<td><nobr class="up">+11</nobr></td><td>37</td><td>48</td><td><a href="https://frut.zundin.se/user_round.php?userid=cuben&roundid=176" target="_blank" rel="noopener noreferrer">cuben</a></td><td>6071</td><td><nobr class="up">125%</nobr></td><td>4856</td><td><a href="https://turfmedals.com/profile/cuben" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>27</td><td>25</td><td> 10</td></tr>
+<td><nobr class="up">+9</nobr></td><td>37</td><td>46</td><td><a href="https://frut.zundin.se/user_round.php?userid=Magister_R&roundid=176" target="_blank" rel="noopener noreferrer">Magister_R</a></td><td>6141</td><td><nobr class="up">124%</nobr></td><td>4941</td><td><a href="https://turfmedals.com/profile/Magister_R" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>28</td><td>22</td><td> 10</td></tr>
 <tr>
-<td><nobr class="down">-1</nobr></td><td>38</td><td>37</td><td><a href="https://frut.zundin.se/user_round.php?userid=frigga7&roundid=176" target="_blank" rel="noopener noreferrer">frigga7</a></td><td>6015</td><td><nobr class="up">107%</nobr></td><td>5585</td><td><a href="https://turfmedals.com/profile/frigga7" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>30</td><td>20</td><td>  9</td></tr>
+<td><nobr class="up">+10</nobr></td><td>38</td><td>48</td><td><a href="https://frut.zundin.se/user_round.php?userid=cuben&roundid=176" target="_blank" rel="noopener noreferrer">cuben</a></td><td>6071</td><td><nobr class="up">125%</nobr></td><td>4856</td><td><a href="https://turfmedals.com/profile/cuben" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>27</td><td>25</td><td> 10</td></tr>
 <tr>
 <td><nobr class="up">+3</nobr></td><td>39</td><td>42</td><td><a href="https://frut.zundin.se/user_round.php?userid=HerculesP&roundid=176" target="_blank" rel="noopener noreferrer">HerculesP</a></td><td>6011</td><td><nobr class="up">111%</nobr></td><td>5414</td><td><a href="https://turfmedals.com/profile/HerculesP" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>30</td><td>21</td><td> 13</td></tr>
 <tr>
 <td><nobr class="down">-1</nobr></td><td>40</td><td>39</td><td><a href="https://frut.zundin.se/user_round.php?userid=Fem%C3%B6ringen&roundid=176" target="_blank" rel="noopener noreferrer">Femöringen</a></td><td>5781</td><td><nobr class="up">105%</nobr></td><td>5503</td><td><a href="https://turfmedals.com/profile/Fem%C3%B6ringen" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>24</td><td>21</td><td> 19</td></tr>
 <tr>
-<td><nobr class="down">-5</nobr></td><td>41</td><td>36</td><td><a href="https://frut.zundin.se/user_round.php?userid=Kvbsare&roundid=176" target="_blank" rel="noopener noreferrer">Kvbsare</a></td><td>5684</td><td>96%</td><td>5881</td><td><a href="https://turfmedals.com/profile/Kvbsare" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>24</td><td>21</td><td>  7</td></tr>
+<td><nobr class="down">-4</nobr></td><td>41</td><td>37</td><td><a href="https://frut.zundin.se/user_round.php?userid=Kvbsare&roundid=176" target="_blank" rel="noopener noreferrer">Kvbsare</a></td><td>5684</td><td>96%</td><td>5881</td><td><a href="https://turfmedals.com/profile/Kvbsare" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>24</td><td>21</td><td>  7</td></tr>
 <tr>
 <td><nobr class="down">-4</nobr></td><td>42</td><td>38</td><td><a href="https://frut.zundin.se/user_round.php?userid=LeeGament&roundid=176" target="_blank" rel="noopener noreferrer">LeeGament</a></td><td>5622</td><td><nobr class="up">101%</nobr></td><td>5534</td><td><a href="https://turfmedals.com/profile/LeeGament" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>25</td><td>21</td><td>  7</td></tr>
 <tr>
@@ -263,29 +357,29 @@
 <tr>
 <td><nobr class="down">-2</nobr></td><td>98</td><td>96</td><td><a href="https://frut.zundin.se/user_round.php?userid=Lunda&roundid=176" target="_blank" rel="noopener noreferrer">Lunda</a></td><td>358</td><td>33%</td><td>1074</td><td><a href="https://turfmedals.com/profile/Lunda" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>4</td><td>1</td><td>  2</td></tr>
 <tr>
-<td><nobr class="up">+1</nobr></td><td>99</td><td>100</td><td><a href="https://frut.zundin.se/user_round.php?userid=sskaff&roundid=176" target="_blank" rel="noopener noreferrer">sskaff</a></td><td>300</td><td>36%</td><td>813</td><td><a href="https://turfmedals.com/profile/sskaff" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>3</td><td>1</td><td>  0</td></tr>
+<td><nobr class="up">+2</nobr></td><td>99</td><td>101</td><td><a href="https://frut.zundin.se/user_round.php?userid=Thorre&roundid=176" target="_blank" rel="noopener noreferrer">Thorre</a></td><td>300</td><td>37%</td><td>790</td><td><a href="https://turfmedals.com/profile/Thorre" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>3</td><td>1</td><td>  0</td></tr>
 <tr>
-<td><nobr class="up">+1</nobr></td><td>100</td><td>101</td><td><a href="https://frut.zundin.se/user_round.php?userid=Thorre&roundid=176" target="_blank" rel="noopener noreferrer">Thorre</a></td><td>300</td><td>37%</td><td>790</td><td><a href="https://turfmedals.com/profile/Thorre" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>3</td><td>1</td><td>  0</td></tr>
+<td>-</td><td>100</td><td>100</td><td><a href="https://frut.zundin.se/user_round.php?userid=sskaff&roundid=176" target="_blank" rel="noopener noreferrer">sskaff</a></td><td>300</td><td>36%</td><td>813</td><td><a href="https://turfmedals.com/profile/sskaff" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>3</td><td>1</td><td>  0</td></tr>
 <tr>
-<td><nobr class="up">+1</nobr></td><td>101</td><td>102</td><td><a href="https://frut.zundin.se/user_round.php?userid=ArthurDent&roundid=176" target="_blank" rel="noopener noreferrer">ArthurDent</a></td><td>300</td><td>38%</td><td>787</td><td><a href="https://turfmedals.com/profile/ArthurDent" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>3</td><td>1</td><td>  0</td></tr>
+<td><nobr class="up">+2</nobr></td><td>101</td><td>103</td><td><a href="https://frut.zundin.se/user_round.php?userid=Fesk56&roundid=176" target="_blank" rel="noopener noreferrer">Fesk56</a></td><td>300</td><td>42%</td><td>713</td><td><a href="https://turfmedals.com/profile/Fesk56" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>3</td><td>1</td><td>  0</td></tr>
 <tr>
 <td><nobr class="down">-5</nobr></td><td>102</td><td>97</td><td><a href="https://frut.zundin.se/user_round.php?userid=Hoffpop.&roundid=176" target="_blank" rel="noopener noreferrer">Hoffpop.</a></td><td>300</td><td>31%</td><td>939</td><td><a href="https://turfmedals.com/profile/Hoffpop." target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>3</td><td>1</td><td>  2</td></tr>
 <tr>
-<td>-</td><td>103</td><td>103</td><td><a href="https://frut.zundin.se/user_round.php?userid=Kelina2018&roundid=176" target="_blank" rel="noopener noreferrer">Kelina2018</a></td><td>300</td><td>43%</td><td>692</td><td><a href="https://turfmedals.com/profile/Kelina2018" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>3</td><td>1</td><td>  0</td></tr>
+<td><nobr class="up">+1</nobr></td><td>103</td><td>104</td><td><a href="https://frut.zundin.se/user_round.php?userid=Kelina2018&roundid=176" target="_blank" rel="noopener noreferrer">Kelina2018</a></td><td>300</td><td>43%</td><td>692</td><td><a href="https://turfmedals.com/profile/Kelina2018" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>3</td><td>1</td><td>  0</td></tr>
 <tr>
-<td>-</td><td>104</td><td>104</td><td><a href="https://frut.zundin.se/user_round.php?userid=Fredrik72&roundid=176" target="_blank" rel="noopener noreferrer">Fredrik72</a></td><td>300</td><td>43%</td><td>690</td><td><a href="https://turfmedals.com/profile/Fredrik72" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>3</td><td>1</td><td>  0</td></tr>
+<td><nobr class="up">+1</nobr></td><td>104</td><td>105</td><td><a href="https://frut.zundin.se/user_round.php?userid=Fredrik72&roundid=176" target="_blank" rel="noopener noreferrer">Fredrik72</a></td><td>300</td><td>43%</td><td>690</td><td><a href="https://turfmedals.com/profile/Fredrik72" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>3</td><td>1</td><td>  0</td></tr>
 <tr>
-<td><nobr class="up">+5</nobr></td><td>105</td><td>110</td><td><a href="https://frut.zundin.se/user_round.php?userid=Mattsson2001&roundid=176" target="_blank" rel="noopener noreferrer">Mattsson2001</a></td><td>243</td><td>48%</td><td>499</td><td><a href="https://turfmedals.com/profile/Mattsson2001" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>2</td><td>1</td><td>  0</td></tr>
+<td><nobr class="down">-3</nobr></td><td>105</td><td>102</td><td><a href="https://frut.zundin.se/user_round.php?userid=ArthurDent&roundid=176" target="_blank" rel="noopener noreferrer">ArthurDent</a></td><td>300</td><td>38%</td><td>787</td><td><a href="https://turfmedals.com/profile/ArthurDent" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>3</td><td>1</td><td>  0</td></tr>
 <tr>
 <td><nobr class="up">+7</nobr></td><td>106</td><td>113</td><td><a href="https://frut.zundin.se/user_round.php?userid=svegus1&roundid=176" target="_blank" rel="noopener noreferrer">svegus1</a></td><td>243</td><td>60%</td><td>403</td><td><a href="https://turfmedals.com/profile/svegus1" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>2</td><td>1</td><td>  0</td></tr>
 <tr>
-<td><nobr class="up">+4</nobr></td><td>107</td><td>111</td><td><a href="https://frut.zundin.se/user_round.php?userid=Nattuven&roundid=176" target="_blank" rel="noopener noreferrer">Nattuven</a></td><td>243</td><td>48%</td><td>496</td><td><a href="https://turfmedals.com/profile/Nattuven" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>2</td><td>1</td><td>  0</td></tr>
+<td><nobr class="up">+3</nobr></td><td>107</td><td>110</td><td><a href="https://frut.zundin.se/user_round.php?userid=Mattsson2001&roundid=176" target="_blank" rel="noopener noreferrer">Mattsson2001</a></td><td>243</td><td>48%</td><td>499</td><td><a href="https://turfmedals.com/profile/Mattsson2001" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>2</td><td>1</td><td>  0</td></tr>
 <tr>
-<td><nobr class="down">-2</nobr></td><td>108</td><td>106</td><td><a href="https://frut.zundin.se/user_round.php?userid=Kamoba&roundid=176" target="_blank" rel="noopener noreferrer">Kamoba</a></td><td>243</td><td>42%</td><td>572</td><td><a href="https://turfmedals.com/profile/Kamoba" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>2</td><td>1</td><td>  0</td></tr>
+<td><nobr class="up">+3</nobr></td><td>108</td><td>111</td><td><a href="https://frut.zundin.se/user_round.php?userid=Nattuven&roundid=176" target="_blank" rel="noopener noreferrer">Nattuven</a></td><td>243</td><td>48%</td><td>496</td><td><a href="https://turfmedals.com/profile/Nattuven" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>2</td><td>1</td><td>  0</td></tr>
 <tr>
-<td><nobr class="down">-1</nobr></td><td>109</td><td>108</td><td><a href="https://frut.zundin.se/user_round.php?userid=SSK&roundid=176" target="_blank" rel="noopener noreferrer">SSK</a></td><td>243</td><td>45%</td><td>535</td><td><a href="https://turfmedals.com/profile/SSK" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>2</td><td>1</td><td>  0</td></tr>
+<td><nobr class="down">-3</nobr></td><td>109</td><td>106</td><td><a href="https://frut.zundin.se/user_round.php?userid=Kamoba&roundid=176" target="_blank" rel="noopener noreferrer">Kamoba</a></td><td>243</td><td>42%</td><td>572</td><td><a href="https://turfmedals.com/profile/Kamoba" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>2</td><td>1</td><td>  0</td></tr>
 <tr>
-<td><nobr class="down">-5</nobr></td><td>110</td><td>105</td><td><a href="https://frut.zundin.se/user_round.php?userid=Fesk56&roundid=176" target="_blank" rel="noopener noreferrer">Fesk56</a></td><td>243</td><td>42%</td><td>573</td><td><a href="https://turfmedals.com/profile/Fesk56" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>2</td><td>1</td><td>  0</td></tr>
+<td><nobr class="down">-2</nobr></td><td>110</td><td>108</td><td><a href="https://frut.zundin.se/user_round.php?userid=SSK&roundid=176" target="_blank" rel="noopener noreferrer">SSK</a></td><td>243</td><td>45%</td><td>535</td><td><a href="https://turfmedals.com/profile/SSK" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>2</td><td>1</td><td>  0</td></tr>
 <tr>
 <td><nobr class="up">+5</nobr></td><td>111</td><td>116</td><td><a href="https://frut.zundin.se/user_round.php?userid=Teddyboo&roundid=176" target="_blank" rel="noopener noreferrer">Teddyboo</a></td><td>185</td><td>49%</td><td>377</td><td><a href="https://turfmedals.com/profile/Teddyboo" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Södermanland</td><td>1</td><td>1</td><td>  0</td></tr>
 <tr>

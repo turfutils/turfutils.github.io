@@ -28,7 +28,101 @@
 
     </head>
     <body>
+                    <div style="padding-left:5px;">
+                    <div id="select-container">
+        <!-- Select boxes added dynamically here -->
+    </div>
 
+
+    <script>
+        // Store select box structure here:
+        let jsonData = {};
+
+        async function loadSelectBox() {
+            try {
+                const response = await fetch('/cache/area_lists/area_list_altscore_a1.json'); // Load external JSON file
+                jsonData = await response.json();
+                if (jsonData.categories) {
+                    createSelectBox(jsonData.categories, "level-1");
+                }
+            } catch (error) {
+                console.error("Error loading JSON data:", error);
+            }
+        }
+
+        function createSelectBox(data, level) {
+            const container = document.getElementById("select-container");
+
+            // Remove all select boxes beyond this level
+            removeLowerLevels(level);
+
+            // Create a new select box
+            const select = document.createElement("select");
+            select.id = level;
+            select.dataset.level = level;
+            select.innerHTML = '<option value="">Select...</option>';
+
+            data.forEach((entry, index) => {
+                const option = document.createElement("option");
+                option.value = index; // Store index for lookup
+                option.textContent = entry.name;
+                option.dataset.index = index;
+                option.dataset.link = entry.link || ""; // Store link only if it's a leaf node
+                select.appendChild(option);
+            });
+
+            container.appendChild(select);
+
+            // Event listener to handle selection changes
+            select.addEventListener("change", function () {
+                handleSelection(this, data);
+            });
+        }
+
+        function handleSelection(selectElement, data) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const selectedIndex = selectedOption.dataset.index;
+            const selectedLink = selectedOption.dataset.link;
+            const level = selectElement.dataset.level;
+
+            if (!selectedIndex) return;
+
+            const selectedData = data[selectedIndex];
+
+            if (selectedLink) {
+                window.location.href = selectedLink; // Redirect if a link exists
+                return;
+            }
+
+            // Determine next level dynamically
+            const nextLevel = `level-${parseInt(level.split('-')[1]) + 1}`;
+
+            if (selectedData.subcategories) {
+                createSelectBox(selectedData.subcategories, nextLevel);
+            } else if (selectedData.items) {
+                createSelectBox(selectedData.items, nextLevel);
+            }
+        }
+
+        function removeLowerLevels(currentLevel) {
+            const container = document.getElementById("select-container");
+            const currentLevelNumber = parseInt(currentLevel.split('-')[1]);
+
+            // Remove all select elements beyond the current level
+            [...container.children].forEach(select => {
+                const selectLevelNumber = parseInt(select.id.split('-')[1]);
+                if (selectLevelNumber >= currentLevelNumber) {
+                    container.removeChild(select);
+                }
+            });
+        }
+
+        // Load and set up selectbox for country/area:
+        loadSelectBox();
+        
+    </script>
+            </div>
+                
         <!--<div class="grid-container halves">-->
         <div style="padding-left:5px;">
             
@@ -55,7 +149,7 @@
         </p>
     </div>
 
-    <p>Updated <b><span class="datestamp">2025-02-04T17:30:19+00:00</span></b></p>
+    <p>Updated <b><span class="datestamp">2025-02-04T17:46:00+00:00</span></b></p>
 
     <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
@@ -67,7 +161,7 @@
 </thead>
 <tbody>
 <tr>
-<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=BlackCoffee&roundid=176" target="_blank" rel="noopener noreferrer">BlackCoffee</a></td><td>25815</td><td>88%</td><td>29200</td><td><a href="https://turfmedals.com/profile/BlackCoffee" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>123</td><td>90</td><td> 36</td></tr>
+<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=BlackCoffee&roundid=176" target="_blank" rel="noopener noreferrer">BlackCoffee</a></td><td>26728</td><td>87%</td><td>30450</td><td><a href="https://turfmedals.com/profile/BlackCoffee" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>130</td><td>93</td><td> 36</td></tr>
 <tr>
 <td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=ecoton&roundid=176" target="_blank" rel="noopener noreferrer">ecoton</a></td><td>22302</td><td>91%</td><td>24422</td><td><a href="https://turfmedals.com/profile/ecoton" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>111</td><td>76</td><td> 40</td></tr>
 <tr>
@@ -81,7 +175,7 @@
 <tr>
 <td><nobr class="down">-2</nobr></td><td>7</td><td>5</td><td><a href="https://frut.zundin.se/user_round.php?userid=sittam&roundid=176" target="_blank" rel="noopener noreferrer">sittam</a></td><td>11559</td><td>88%</td><td>13124</td><td><a href="https://turfmedals.com/profile/sittam" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>48</td><td>46</td><td> 22</td></tr>
 <tr>
-<td>-</td><td>8</td><td>8</td><td><a href="https://frut.zundin.se/user_round.php?userid=sus&roundid=176" target="_blank" rel="noopener noreferrer">sus</a></td><td>10316</td><td><nobr class="up">104%</nobr></td><td>9919</td><td><a href="https://turfmedals.com/profile/sus" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>43</td><td>40</td><td>  8</td></tr>
+<td>-</td><td>8</td><td>8</td><td><a href="https://frut.zundin.se/user_round.php?userid=sus&roundid=176" target="_blank" rel="noopener noreferrer">sus</a></td><td>11380</td><td><nobr class="up">108%</nobr></td><td>10474</td><td><a href="https://turfmedals.com/profile/sus" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>46</td><td>45</td><td>  8</td></tr>
 <tr>
 <td>-</td><td>9</td><td>9</td><td><a href="https://frut.zundin.se/user_round.php?userid=Topsecret&roundid=176" target="_blank" rel="noopener noreferrer">Topsecret</a></td><td>7885</td><td>88%</td><td>8913</td><td><a href="https://turfmedals.com/profile/Topsecret" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>39</td><td>28</td><td> 10</td></tr>
 <tr>
@@ -95,11 +189,11 @@
 <tr>
 <td><nobr class="up">+1</nobr></td><td>14</td><td>15</td><td><a href="https://frut.zundin.se/user_round.php?userid=Madutt&roundid=176" target="_blank" rel="noopener noreferrer">Madutt</a></td><td>5474</td><td>97%</td><td>5613</td><td><a href="https://turfmedals.com/profile/Madutt" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>30</td><td>18</td><td>  7</td></tr>
 <tr>
-<td><nobr class="down">-2</nobr></td><td>15</td><td>13</td><td><a href="https://frut.zundin.se/user_round.php?userid=Goran57&roundid=176" target="_blank" rel="noopener noreferrer">Goran57</a></td><td>5001</td><td>80%</td><td>6203</td><td><a href="https://turfmedals.com/profile/Goran57" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>21</td><td>21</td><td>  8</td></tr>
+<td><nobr class="up">+1</nobr></td><td>15</td><td>16</td><td><a href="https://frut.zundin.se/user_round.php?userid=Sopran1&roundid=176" target="_blank" rel="noopener noreferrer">Sopran1</a></td><td>5172</td><td><nobr class="up">109%</nobr></td><td>4718</td><td><a href="https://turfmedals.com/profile/Sopran1" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>23</td><td>19</td><td>  5</td></tr>
 <tr>
-<td><nobr class="up">+1</nobr></td><td>16</td><td>17</td><td><a href="https://frut.zundin.se/user_round.php?userid=Sopran1&roundid=176" target="_blank" rel="noopener noreferrer">Sopran1</a></td><td>4270</td><td>99%</td><td>4283</td><td><a href="https://turfmedals.com/profile/Sopran1" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>20</td><td>15</td><td>  5</td></tr>
+<td><nobr class="down">-3</nobr></td><td>16</td><td>13</td><td><a href="https://frut.zundin.se/user_round.php?userid=Goran57&roundid=176" target="_blank" rel="noopener noreferrer">Goran57</a></td><td>5001</td><td>80%</td><td>6203</td><td><a href="https://turfmedals.com/profile/Goran57" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>21</td><td>21</td><td>  8</td></tr>
 <tr>
-<td><nobr class="down">-1</nobr></td><td>17</td><td>16</td><td><a href="https://frut.zundin.se/user_round.php?userid=Martin_E&roundid=176" target="_blank" rel="noopener noreferrer">Martin_E</a></td><td>4240</td><td>91%</td><td>4615</td><td><a href="https://turfmedals.com/profile/Martin_E" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>20</td><td>13</td><td> 10</td></tr>
+<td>-</td><td>17</td><td>17</td><td><a href="https://frut.zundin.se/user_round.php?userid=Martin_E&roundid=176" target="_blank" rel="noopener noreferrer">Martin_E</a></td><td>4240</td><td>91%</td><td>4615</td><td><a href="https://turfmedals.com/profile/Martin_E" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>20</td><td>13</td><td> 10</td></tr>
 <tr>
 <td><nobr class="up">+1</nobr></td><td>18</td><td>19</td><td><a href="https://frut.zundin.se/user_round.php?userid=Pr0secc0&roundid=176" target="_blank" rel="noopener noreferrer">Pr0secc0</a></td><td>4027</td><td><nobr class="up">104%</nobr></td><td>3865</td><td><a href="https://turfmedals.com/profile/Pr0secc0" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/se.png" height="20" alt="se"></a></td><td>Kronoberg</td><td>19</td><td>14</td><td>  9</td></tr>
 <tr>

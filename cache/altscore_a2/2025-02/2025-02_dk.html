@@ -28,7 +28,101 @@
 
     </head>
     <body>
+                    <div style="padding-left:5px;">
+                    <div id="select-container">
+        <!-- Select boxes added dynamically here -->
+    </div>
 
+
+    <script>
+        // Store select box structure here:
+        let jsonData = {};
+
+        async function loadSelectBox() {
+            try {
+                const response = await fetch('/cache/area_lists/area_list_altscore_a1.json'); // Load external JSON file
+                jsonData = await response.json();
+                if (jsonData.categories) {
+                    createSelectBox(jsonData.categories, "level-1");
+                }
+            } catch (error) {
+                console.error("Error loading JSON data:", error);
+            }
+        }
+
+        function createSelectBox(data, level) {
+            const container = document.getElementById("select-container");
+
+            // Remove all select boxes beyond this level
+            removeLowerLevels(level);
+
+            // Create a new select box
+            const select = document.createElement("select");
+            select.id = level;
+            select.dataset.level = level;
+            select.innerHTML = '<option value="">Select...</option>';
+
+            data.forEach((entry, index) => {
+                const option = document.createElement("option");
+                option.value = index; // Store index for lookup
+                option.textContent = entry.name;
+                option.dataset.index = index;
+                option.dataset.link = entry.link || ""; // Store link only if it's a leaf node
+                select.appendChild(option);
+            });
+
+            container.appendChild(select);
+
+            // Event listener to handle selection changes
+            select.addEventListener("change", function () {
+                handleSelection(this, data);
+            });
+        }
+
+        function handleSelection(selectElement, data) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const selectedIndex = selectedOption.dataset.index;
+            const selectedLink = selectedOption.dataset.link;
+            const level = selectElement.dataset.level;
+
+            if (!selectedIndex) return;
+
+            const selectedData = data[selectedIndex];
+
+            if (selectedLink) {
+                window.location.href = selectedLink; // Redirect if a link exists
+                return;
+            }
+
+            // Determine next level dynamically
+            const nextLevel = `level-${parseInt(level.split('-')[1]) + 1}`;
+
+            if (selectedData.subcategories) {
+                createSelectBox(selectedData.subcategories, nextLevel);
+            } else if (selectedData.items) {
+                createSelectBox(selectedData.items, nextLevel);
+            }
+        }
+
+        function removeLowerLevels(currentLevel) {
+            const container = document.getElementById("select-container");
+            const currentLevelNumber = parseInt(currentLevel.split('-')[1]);
+
+            // Remove all select elements beyond the current level
+            [...container.children].forEach(select => {
+                const selectLevelNumber = parseInt(select.id.split('-')[1]);
+                if (selectLevelNumber >= currentLevelNumber) {
+                    container.removeChild(select);
+                }
+            });
+        }
+
+        // Load and set up selectbox for country/area:
+        loadSelectBox();
+        
+    </script>
+            </div>
+                
         <!--<div class="grid-container halves">-->
         <div style="padding-left:5px;">
             
@@ -54,7 +148,7 @@
             Explanation and examples of score calculations.</a>
     </p>
 
-    <p>Updated <b><span class="datestamp">2025-02-04T17:30:16+00:00</span></b></p>
+    <p>Updated <b><span class="datestamp">2025-02-04T17:45:57+00:00</span></b></p>
 
     <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
@@ -66,15 +160,15 @@
 </thead>
 <tbody>
 <tr>
-<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=Teien&roundid=176" target="_blank" rel="noopener noreferrer">Teien</a></td><td>33413</td><td>42%</td><td>78540</td><td><a href="https://turfmedals.com/profile/Teien" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/dk.png" height="20" alt="dk"></a></td><td>Nordjylland</td><td>301</td><td>301</td><td> 95</td></tr>
+<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=Teien&roundid=176" target="_blank" rel="noopener noreferrer">Teien</a></td><td>33413</td><td>42%</td><td>78540</td><td><a href="https://turfmedals.com/profile/Teien" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/dk.png" height="20" alt="dk"></a></td><td>Nordjylland</td><td>301</td><td>301</td><td>214</td></tr>
 <tr>
 <td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=Livseliv&roundid=176" target="_blank" rel="noopener noreferrer">Livseliv</a></td><td>8832</td><td>42%</td><td>20892</td><td><a href="https://turfmedals.com/profile/Livseliv" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/dk.png" height="20" alt="dk"></a></td><td>Hovedstaden</td><td>85</td><td>76</td><td> 35</td></tr>
 <tr>
-<td>-</td><td>3</td><td>3</td><td><a href="https://frut.zundin.se/user_round.php?userid=HEP1961&roundid=176" target="_blank" rel="noopener noreferrer">HEP1961</a></td><td>6946</td><td>42%</td><td>16350</td><td><a href="https://turfmedals.com/profile/HEP1961" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/dk.png" height="20" alt="dk"></a></td><td>Hovedstaden</td><td>66</td><td>53</td><td> 29</td></tr>
+<td>-</td><td>3</td><td>3</td><td><a href="https://frut.zundin.se/user_round.php?userid=HEP1961&roundid=176" target="_blank" rel="noopener noreferrer">HEP1961</a></td><td>6946</td><td>42%</td><td>16350</td><td><a href="https://turfmedals.com/profile/HEP1961" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/dk.png" height="20" alt="dk"></a></td><td>Hovedstaden</td><td>66</td><td>53</td><td> 32</td></tr>
 <tr>
 <td>-</td><td>4</td><td>4</td><td><a href="https://frut.zundin.se/user_round.php?userid=Candibal&roundid=176" target="_blank" rel="noopener noreferrer">Candibal</a></td><td>4630</td><td>39%</td><td>11637</td><td><a href="https://turfmedals.com/profile/Candibal" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/dk.png" height="20" alt="dk"></a></td><td>Hovedstaden</td><td>44</td><td>38</td><td> 16</td></tr>
 <tr>
-<td>-</td><td>5</td><td>5</td><td><a href="https://frut.zundin.se/user_round.php?userid=SUSP3ND3D&roundid=176" target="_blank" rel="noopener noreferrer">SUSP3ND3D</a></td><td>3851</td><td>43%</td><td>8814</td><td><a href="https://turfmedals.com/profile/SUSP3ND3D" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/dk.png" height="20" alt="dk"></a></td><td>Nordjylland</td><td>37</td><td>27</td><td> 10</td></tr>
+<td>-</td><td>5</td><td>5</td><td><a href="https://frut.zundin.se/user_round.php?userid=SUSP3ND3D&roundid=176" target="_blank" rel="noopener noreferrer">SUSP3ND3D</a></td><td>3851</td><td>43%</td><td>8814</td><td><a href="https://turfmedals.com/profile/SUSP3ND3D" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/dk.png" height="20" alt="dk"></a></td><td>Nordjylland</td><td>37</td><td>27</td><td> 18</td></tr>
 <tr>
 <td><nobr class="up">+1</nobr></td><td>6</td><td>7</td><td><a href="https://frut.zundin.se/user_round.php?userid=Bielpe&roundid=176" target="_blank" rel="noopener noreferrer">Bielpe</a></td><td>3238</td><td>45%</td><td>7185</td><td><a href="https://turfmedals.com/profile/Bielpe" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/dk.png" height="20" alt="dk"></a></td><td>Hovedstaden</td><td>31</td><td>24</td><td>  5</td></tr>
 <tr>

@@ -28,7 +28,101 @@
 
     </head>
     <body>
+                    <div style="padding-left:5px;">
+                    <div id="select-container">
+        <!-- Select boxes added dynamically here -->
+    </div>
 
+
+    <script>
+        // Store select box structure here:
+        let jsonData = {};
+
+        async function loadSelectBox() {
+            try {
+                const response = await fetch('/cache/area_lists/area_list_altscore_a1.json'); // Load external JSON file
+                jsonData = await response.json();
+                if (jsonData.categories) {
+                    createSelectBox(jsonData.categories, "level-1");
+                }
+            } catch (error) {
+                console.error("Error loading JSON data:", error);
+            }
+        }
+
+        function createSelectBox(data, level) {
+            const container = document.getElementById("select-container");
+
+            // Remove all select boxes beyond this level
+            removeLowerLevels(level);
+
+            // Create a new select box
+            const select = document.createElement("select");
+            select.id = level;
+            select.dataset.level = level;
+            select.innerHTML = '<option value="">Select...</option>';
+
+            data.forEach((entry, index) => {
+                const option = document.createElement("option");
+                option.value = index; // Store index for lookup
+                option.textContent = entry.name;
+                option.dataset.index = index;
+                option.dataset.link = entry.link || ""; // Store link only if it's a leaf node
+                select.appendChild(option);
+            });
+
+            container.appendChild(select);
+
+            // Event listener to handle selection changes
+            select.addEventListener("change", function () {
+                handleSelection(this, data);
+            });
+        }
+
+        function handleSelection(selectElement, data) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const selectedIndex = selectedOption.dataset.index;
+            const selectedLink = selectedOption.dataset.link;
+            const level = selectElement.dataset.level;
+
+            if (!selectedIndex) return;
+
+            const selectedData = data[selectedIndex];
+
+            if (selectedLink) {
+                window.location.href = selectedLink; // Redirect if a link exists
+                return;
+            }
+
+            // Determine next level dynamically
+            const nextLevel = `level-${parseInt(level.split('-')[1]) + 1}`;
+
+            if (selectedData.subcategories) {
+                createSelectBox(selectedData.subcategories, nextLevel);
+            } else if (selectedData.items) {
+                createSelectBox(selectedData.items, nextLevel);
+            }
+        }
+
+        function removeLowerLevels(currentLevel) {
+            const container = document.getElementById("select-container");
+            const currentLevelNumber = parseInt(currentLevel.split('-')[1]);
+
+            // Remove all select elements beyond the current level
+            [...container.children].forEach(select => {
+                const selectLevelNumber = parseInt(select.id.split('-')[1]);
+                if (selectLevelNumber >= currentLevelNumber) {
+                    container.removeChild(select);
+                }
+            });
+        }
+
+        // Load and set up selectbox for country/area:
+        loadSelectBox();
+        
+    </script>
+            </div>
+                
         <!--<div class="grid-container halves">-->
         <div style="padding-left:5px;">
             
@@ -54,7 +148,7 @@
             Explanation and examples of score calculations.</a>
     </p>
 
-    <p>Updated <b><span class="datestamp">2025-02-04T17:30:21+00:00</span></b></p>
+    <p>Updated <b><span class="datestamp">2025-02-04T17:46:01+00:00</span></b></p>
 
     <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
@@ -76,7 +170,7 @@
 <tr>
 <td>-</td><td>5</td><td>5</td><td><a href="https://frut.zundin.se/user_round.php?userid=Ado&roundid=176" target="_blank" rel="noopener noreferrer">Ado</a></td><td>6896</td><td>43%</td><td>15853</td><td><a href="https://turfmedals.com/profile/Ado" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>North West England</td><td>62</td><td>60</td><td> 56</td></tr>
 <tr>
-<td><nobr class="up">+1</nobr></td><td>6</td><td>7</td><td><a href="https://frut.zundin.se/user_round.php?userid=Querny&roundid=176" target="_blank" rel="noopener noreferrer">Querny</a></td><td>6854</td><td>45%</td><td>15205</td><td><a href="https://turfmedals.com/profile/Querny" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>North West England</td><td>61</td><td>45</td><td> 29</td></tr>
+<td><nobr class="up">+1</nobr></td><td>6</td><td>7</td><td><a href="https://frut.zundin.se/user_round.php?userid=Querny&roundid=176" target="_blank" rel="noopener noreferrer">Querny</a></td><td>6854</td><td>45%</td><td>15205</td><td><a href="https://turfmedals.com/profile/Querny" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>North West England</td><td>61</td><td>45</td><td> 30</td></tr>
 <tr>
 <td><nobr class="down">-1</nobr></td><td>7</td><td>6</td><td><a href="https://frut.zundin.se/user_round.php?userid=turfhopper&roundid=176" target="_blank" rel="noopener noreferrer">turfhopper</a></td><td>6389</td><td>40%</td><td>15589</td><td><a href="https://turfmedals.com/profile/turfhopper" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>North West England</td><td>56</td><td>56</td><td> 23</td></tr>
 <tr>

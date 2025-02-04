@@ -28,7 +28,101 @@
 
     </head>
     <body>
+                    <div style="padding-left:5px;">
+                    <div id="select-container">
+        <!-- Select boxes added dynamically here -->
+    </div>
 
+
+    <script>
+        // Store select box structure here:
+        let jsonData = {};
+
+        async function loadSelectBox() {
+            try {
+                const response = await fetch('/cache/area_lists/area_list_altscore_a1.json'); // Load external JSON file
+                jsonData = await response.json();
+                if (jsonData.categories) {
+                    createSelectBox(jsonData.categories, "level-1");
+                }
+            } catch (error) {
+                console.error("Error loading JSON data:", error);
+            }
+        }
+
+        function createSelectBox(data, level) {
+            const container = document.getElementById("select-container");
+
+            // Remove all select boxes beyond this level
+            removeLowerLevels(level);
+
+            // Create a new select box
+            const select = document.createElement("select");
+            select.id = level;
+            select.dataset.level = level;
+            select.innerHTML = '<option value="">Select...</option>';
+
+            data.forEach((entry, index) => {
+                const option = document.createElement("option");
+                option.value = index; // Store index for lookup
+                option.textContent = entry.name;
+                option.dataset.index = index;
+                option.dataset.link = entry.link || ""; // Store link only if it's a leaf node
+                select.appendChild(option);
+            });
+
+            container.appendChild(select);
+
+            // Event listener to handle selection changes
+            select.addEventListener("change", function () {
+                handleSelection(this, data);
+            });
+        }
+
+        function handleSelection(selectElement, data) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const selectedIndex = selectedOption.dataset.index;
+            const selectedLink = selectedOption.dataset.link;
+            const level = selectElement.dataset.level;
+
+            if (!selectedIndex) return;
+
+            const selectedData = data[selectedIndex];
+
+            if (selectedLink) {
+                window.location.href = selectedLink; // Redirect if a link exists
+                return;
+            }
+
+            // Determine next level dynamically
+            const nextLevel = `level-${parseInt(level.split('-')[1]) + 1}`;
+
+            if (selectedData.subcategories) {
+                createSelectBox(selectedData.subcategories, nextLevel);
+            } else if (selectedData.items) {
+                createSelectBox(selectedData.items, nextLevel);
+            }
+        }
+
+        function removeLowerLevels(currentLevel) {
+            const container = document.getElementById("select-container");
+            const currentLevelNumber = parseInt(currentLevel.split('-')[1]);
+
+            // Remove all select elements beyond the current level
+            [...container.children].forEach(select => {
+                const selectLevelNumber = parseInt(select.id.split('-')[1]);
+                if (selectLevelNumber >= currentLevelNumber) {
+                    container.removeChild(select);
+                }
+            });
+        }
+
+        // Load and set up selectbox for country/area:
+        loadSelectBox();
+        
+    </script>
+            </div>
+                
         <!--<div class="grid-container halves">-->
         <div style="padding-left:5px;">
             
@@ -55,7 +149,7 @@
         </p>
     </div>
 
-    <p>Updated <b><span class="datestamp">2025-02-04T17:30:23+00:00</span></b></p>
+    <p>Updated <b><span class="datestamp">2025-02-04T17:46:04+00:00</span></b></p>
 
     <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
@@ -67,7 +161,7 @@
 </thead>
 <tbody>
 <tr>
-<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=RoVo&roundid=176" target="_blank" rel="noopener noreferrer">RoVo</a></td><td>46835</td><td><nobr class="up">101%</nobr></td><td>46345</td><td><a href="https://turfmedals.com/profile/RoVo" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Berlin</td><td>190</td><td>179</td><td> 67</td></tr>
+<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=RoVo&roundid=176" target="_blank" rel="noopener noreferrer">RoVo</a></td><td>48565</td><td><nobr class="up">101%</nobr></td><td>47825</td><td><a href="https://turfmedals.com/profile/RoVo" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Berlin</td><td>198</td><td>187</td><td> 67</td></tr>
 <tr>
 <td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=nicos&roundid=176" target="_blank" rel="noopener noreferrer">nicos</a></td><td>24728</td><td>99%</td><td>24732</td><td><a href="https://turfmedals.com/profile/nicos" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Berlin</td><td>97</td><td>94</td><td> 33</td></tr>
 <tr>
@@ -75,7 +169,7 @@
 <tr>
 <td><nobr class="down">-1</nobr></td><td>4</td><td>3</td><td><a href="https://frut.zundin.se/user_round.php?userid=Lindholmen&roundid=176" target="_blank" rel="noopener noreferrer">Lindholmen</a></td><td>14492</td><td>94%</td><td>15264</td><td><a href="https://turfmedals.com/profile/Lindholmen" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Berlin</td><td>63</td><td>56</td><td> 21</td></tr>
 <tr>
-<td>-</td><td>5</td><td>5</td><td><a href="https://frut.zundin.se/user_round.php?userid=D1etm4rM&roundid=176" target="_blank" rel="noopener noreferrer">D1etm4rM</a></td><td>11908</td><td><nobr class="up">124%</nobr></td><td>9565</td><td><a href="https://turfmedals.com/profile/D1etm4rM" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Berlin</td><td>37</td><td>35</td><td> 45</td></tr>
+<td>-</td><td>5</td><td>5</td><td><a href="https://frut.zundin.se/user_round.php?userid=D1etm4rM&roundid=176" target="_blank" rel="noopener noreferrer">D1etm4rM</a></td><td>11966</td><td><nobr class="up">122%</nobr></td><td>9750</td><td><a href="https://turfmedals.com/profile/D1etm4rM" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Berlin</td><td>38</td><td>35</td><td> 45</td></tr>
 <tr>
 <td>-</td><td>6</td><td>6</td><td><a href="https://frut.zundin.se/user_round.php?userid=Landoran&roundid=176" target="_blank" rel="noopener noreferrer">Landoran</a></td><td>7703</td><td><nobr class="up">101%</nobr></td><td>7587</td><td><a href="https://turfmedals.com/profile/Landoran" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Berlin</td><td>28</td><td>26</td><td> 20</td></tr>
 <tr>
