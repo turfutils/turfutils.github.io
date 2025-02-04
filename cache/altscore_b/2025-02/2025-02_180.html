@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <title>Turf a Million [Sørlandet]</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- Mobile Specific Metas
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- FONT
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+        <!-- CSS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/barebones.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/turf.css" rel="stylesheet" type="text/css" />
+
+                <script src="/assets/js/sortable.min.js"></script>
+        <script src="/assets/js/utils.js"></script>
+        
+        <link rel="icon" type="image/png" href="assets/img/favicon-16.png">
+
+    </head>
+    <body>
+
+        <!--<div class="grid-container halves">-->
+        <div style="padding-left:5px;">
+            
+<div style="max-width: 700px">
+    <h1>Turf a Million</h1>
+            <h3>[Sørlandet]</h3>
+        <h3>Round 2025-02</h3>
+    <p>
+        <a href="2025-01.html">&lt;&lt; 2025-01</a> --- 
+        <a href="2025-03.html">2025-03 &gt;&gt;</a>
+    </p>
+    <p>Can you reach a score of a million points?</p>
+    
+    <div class="more">
+        <p>This is a list where you cannot get more than a million points. One third of the factor is 
+            determind by the amount of takes you have, one third of the factor is determind by the amount 
+            of round uniques you have and the last third of the factor is determind by the amount of 
+            travel distance you have this round.</p>
+
+        <p>Columns left to right: [Placement difference], [Place], 
+            [Turfplace], [Name], [Score], [% diff], [Turfscore] (Rotate screen for all data). 
+            <a href="https://turfutils.github.io/cache/info/example_scores.html" target="_blank">
+                Explanation and examples of score calculations.</a>
+        </p>
+    </div>
+
+    <p>Updated <b><span class="datestamp">2025-02-04T17:09:45+00:00</span></b></p>
+
+    <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
+
+</div>
+<table id="scoretable" border="0" cellpadding="4" cellspacing="0" class="hiscore_table resp-table sortable-theme-bootstrap" data-sortable>
+<thead>
+<tr>
+<th>-+</th><th>#</th><th>(#)</th><th>NAME</th><th>NEW</th><th>DIFF</th><th>OLD</th><th>FLAG</th><th>AREA</th><th>Takes</th><th>Unique</th><th>Km</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=lubben70&roundid=176" target="_blank" rel="noopener noreferrer">lubben70</a></td><td>185</td><td>35%</td><td>516</td><td><a href="https://turfmedals.com/profile/lubben70" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Sørlandet</td><td>1</td><td>1</td><td>  0</td></tr>
+</tbody>
+</table>        </div>
+        <!--</div>-->
+
+
+        <script>
+            function searchName(col = 3) {
+                // Declare variables
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("searchInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("scoretable");
+                tr = table.getElementsByTagName("tr");
+
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[col];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+            }
+            }
+
+            /* --------------------------
+             * Convert all span elements with class "datestamp" to local timezone for user:
+             */
+            const datestampElements = document.querySelectorAll('span.datestamp');
+
+            datestampElements.forEach((element) => {
+                const datestampText = element.textContent;
+
+                try {
+                    const date = new Date(datestampText);
+
+                    // Check if the date is valid
+                    if (isNaN(date)) {
+                        throw new Error("Invalid date format");
+                    }
+
+                    // Format the date as YYYY-MM-DD
+                    const formattedDate = date.toLocaleDateString("sv-SE"); // "sv-SE" uses ISO 8601 format (YYYY-MM-DD)
+
+                    // Format the time as HH:mm:ss
+                    const formattedTime = date.toLocaleTimeString("sv-SE", {
+                        hour12: false, // 24-hour format
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                    });
+                    const formattedDateTime = `${formattedDate}T${formattedTime}`;
+
+                    // Update the text content of the element
+                    element.textContent = formattedDateTime + ' (local time)';
+                } catch (error) {
+                    console.error(`Error processing date for element: ${datestampText}`, error.message);
+                }
+            });
+        </script>
+    </body>
+</html>
