@@ -3,7 +3,7 @@
     <head>
 
         <meta charset="utf-8">
-        <title>Turf EQualized scoring [Greater London]</title>
+        <title>Turf a Million [Luxembourg]</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -40,7 +40,7 @@
 
         async function loadSelectBox() {
             try {
-                const response = await fetch('/cache/area_lists/area_list_altscore_a1.json'); // Load external JSON file
+                const response = await fetch('/cache/area_lists/area_list_altscore_b.json'); // Load external JSON file
                 jsonData = await response.json();
                 if (jsonData.categories) {
                     createSelectBox(jsonData.categories, "level-1");
@@ -127,28 +127,29 @@
         <div style="padding-left:5px;">
             
 <div style="max-width: 700px">
-    <h1>EQualized scoring</h1>
-            <h3>[Greater London]</h3>
-        <h3>Round 2025-02 (Alt 1)</h3>
+    <h1>Turf a Million</h1>
+            <h3>[Luxembourg]</h3>
+        <h3>Round 2025-02</h3>
     <p>
         <a href="2025-01.html">&lt;&lt; 2025-01</a> --- 
         <a href="2025-03.html">2025-03 &gt;&gt;</a>
     </p>
+    <p>Can you reach a score of a million points?</p>
+    
+    <div class="more">
+        <p>This is a list where you cannot get more than a million points. One third of the factor is 
+            determind by the amount of takes you have, one third of the factor is determind by the amount 
+            of round uniques you have and the last third of the factor is determind by the amount of 
+            travel distance you have this round.</p>
 
-    <p>
-        This is the easier list where we count the points by giving every zone <u title="Points Per Take - PPT">100 points</u> and then 
-        giving you a factor of the absolute maximum of 2 (meaning that no zone can give more than 
-        200 points total) and the two factors are zone takes this round and zone takes the last 24 
-        hours. Absolutely no <u title="Points Per Hour - PPH">PPH</u> points at all.
-    </p>
+        <p>Columns left to right: [Placement difference], [Place], 
+            [Turfplace], [Name], [Score], [% diff], [Turfscore] (Rotate screen for all data). 
+            <a href="https://turfutils.github.io/cache/info/example_scores.html" target="_blank">
+                Explanation and examples of score calculations.</a>
+        </p>
+    </div>
 
-    <p>Columns left to right: [Placement difference], [Place], 
-        [Turfplace], [Name], [Score], [% Diff], [Turfscore] (Rotate screen for all data).
-        <a href="https://turfutils.github.io/cache/info/example_scores.html" target="_blank">
-            Explanation and examples of score calculations.</a>
-    </p>
-
-    <p>Updated <b><span class="datestamp">2025-02-05T07:30:21+00:00</span></b></p>
+    <p>Updated <b><span class="datestamp">2025-02-05T07:30:22+00:00</span></b></p>
 
     <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
@@ -160,35 +161,7 @@
 </thead>
 <tbody>
 <tr>
-<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=AJHB&roundid=176" target="_blank" rel="noopener noreferrer">AJHB</a></td><td>28577</td><td>49%</td><td>57315</td><td><a href="https://turfmedals.com/profile/AJHB" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>225</td><td>221</td><td>107</td></tr>
-<tr>
-<td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=cake%3F&roundid=176" target="_blank" rel="noopener noreferrer">cake?</a></td><td>10160</td><td>47%</td><td>21339</td><td><a href="https://turfmedals.com/profile/cake%3F" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>89</td><td>83</td><td> 27</td></tr>
-<tr>
-<td>-</td><td>3</td><td>3</td><td><a href="https://frut.zundin.se/user_round.php?userid=PMHart&roundid=176" target="_blank" rel="noopener noreferrer">PMHart</a></td><td>5059</td><td>39%</td><td>12773</td><td><a href="https://turfmedals.com/profile/PMHart" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>47</td><td>44</td><td> 28</td></tr>
-<tr>
-<td>-</td><td>4</td><td>4</td><td><a href="https://frut.zundin.se/user_round.php?userid=northstar&roundid=176" target="_blank" rel="noopener noreferrer">northstar</a></td><td>3952</td><td>44%</td><td>8979</td><td><a href="https://turfmedals.com/profile/northstar" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>35</td><td>30</td><td> 11</td></tr>
-<tr>
-<td>-</td><td>5</td><td>5</td><td><a href="https://frut.zundin.se/user_round.php?userid=lou%2153&roundid=176" target="_blank" rel="noopener noreferrer">lou!53</a></td><td>3937</td><td>44%</td><td>8795</td><td><a href="https://turfmedals.com/profile/lou%2153" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>36</td><td>33</td><td> 21</td></tr>
-<tr>
-<td>-</td><td>6</td><td>6</td><td><a href="https://frut.zundin.se/user_round.php?userid=Bernie27&roundid=176" target="_blank" rel="noopener noreferrer">Bernie27</a></td><td>3283</td><td>38%</td><td>8508</td><td><a href="https://turfmedals.com/profile/Bernie27" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>30</td><td>26</td><td> 37</td></tr>
-<tr>
-<td><nobr class="up">+1</nobr></td><td>7</td><td>8</td><td><a href="https://frut.zundin.se/user_round.php?userid=Tonilator&roundid=176" target="_blank" rel="noopener noreferrer">Tonilator</a></td><td>2571</td><td>37%</td><td>6856</td><td><a href="https://turfmedals.com/profile/Tonilator" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>23</td><td>21</td><td> 19</td></tr>
-<tr>
-<td><nobr class="down">-1</nobr></td><td>8</td><td>7</td><td><a href="https://frut.zundin.se/user_round.php?userid=vuuv&roundid=176" target="_blank" rel="noopener noreferrer">vuuv</a></td><td>2532</td><td>36%</td><td>6996</td><td><a href="https://turfmedals.com/profile/vuuv" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>23</td><td>21</td><td>  8</td></tr>
-<tr>
-<td>-</td><td>9</td><td>9</td><td><a href="https://frut.zundin.se/user_round.php?userid=barbsie&roundid=176" target="_blank" rel="noopener noreferrer">barbsie</a></td><td>2184</td><td>40%</td><td>5382</td><td><a href="https://turfmedals.com/profile/barbsie" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>20</td><td>16</td><td> 17</td></tr>
-<tr>
-<td>-</td><td>10</td><td>10</td><td><a href="https://frut.zundin.se/user_round.php?userid=Philippajc&roundid=176" target="_blank" rel="noopener noreferrer">Philippajc</a></td><td>1543</td><td>41%</td><td>3754</td><td><a href="https://turfmedals.com/profile/Philippajc" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>14</td><td>11</td><td>  7</td></tr>
-<tr>
-<td>-</td><td>11</td><td>11</td><td><a href="https://frut.zundin.se/user_round.php?userid=BiggusVikus&roundid=176" target="_blank" rel="noopener noreferrer">BiggusVikus</a></td><td>1025</td><td>41%</td><td>2494</td><td><a href="https://turfmedals.com/profile/BiggusVikus" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>9</td><td>6</td><td>  0</td></tr>
-<tr>
-<td>-</td><td>12</td><td>12</td><td><a href="https://frut.zundin.se/user_round.php?userid=BGebruers&roundid=176" target="_blank" rel="noopener noreferrer">BGebruers</a></td><td>909</td><td>37%</td><td>2452</td><td><a href="https://turfmedals.com/profile/BGebruers" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>8</td><td>6</td><td>  3</td></tr>
-<tr>
-<td>-</td><td>13</td><td>13</td><td><a href="https://frut.zundin.se/user_round.php?userid=rubyroo&roundid=176" target="_blank" rel="noopener noreferrer">rubyroo</a></td><td>507</td><td>45%</td><td>1117</td><td><a href="https://turfmedals.com/profile/rubyroo" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>4</td><td>1</td><td>  0</td></tr>
-<tr>
-<td>-</td><td>14</td><td>14</td><td><a href="https://frut.zundin.se/user_round.php?userid=Southpaw&roundid=176" target="_blank" rel="noopener noreferrer">Southpaw</a></td><td>200</td><td>55%</td><td>360</td><td><a href="https://turfmedals.com/profile/Southpaw" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>1</td><td>1</td><td>  0</td></tr>
-<tr>
-<td>-</td><td>15</td><td>15</td><td><a href="https://frut.zundin.se/user_round.php?userid=Coo34&roundid=176" target="_blank" rel="noopener noreferrer">Coo34</a></td><td>100</td><td>40%</td><td>250</td><td><a href="https://turfmedals.com/profile/Coo34" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/gb.png" height="20" alt="gb"></a></td><td>Greater London</td><td>0</td><td></td><td>  0</td></tr>
+<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=flep&roundid=176" target="_blank" rel="noopener noreferrer">flep</a></td><td>0</td><td>0%</td><td>185</td><td><a href="https://turfmedals.com/profile/flep" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/.png" height="20" alt=""></a></td><td>Luxembourg</td><td>0</td><td></td><td>  0</td></tr>
 </tbody>
 </table>        </div>
         <!--</div>-->
