@@ -3,7 +3,7 @@
     <head>
 
         <meta charset="utf-8">
-        <title>Turf EQualized scoring [Minnesota]</title>
+        <title>Twenty4 hour rush [Zeeland]</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -40,7 +40,7 @@
 
         async function loadSelectBox() {
             try {
-                const response = await fetch('/cache/area_lists/area_list_altscore_a1.json'); // Load external JSON file
+                const response = await fetch('/cache/area_lists/area_list_altscore_a2.json'); // Load external JSON file
                 jsonData = await response.json();
                 if (jsonData.categories) {
                     createSelectBox(jsonData.categories, "level-1");
@@ -127,28 +127,28 @@
         <div style="padding-left:5px;">
             
 <div style="max-width: 700px">
-    <h1>EQualized scoring</h1>
-            <h3>[Minnesota]</h3>
-        <h3>Round 2025-02 (Alt 1)</h3>
+    <h1>Twenty4 hour rush</h1>
+            <h3>[Zeeland]</h3>
+        <h3>Round 2025-02 (Alt 2)</h3>
     <p>
         <a href="2025-01.html">&lt;&lt; 2025-01</a> --- 
         <a href="2025-03.html">2025-03 &gt;&gt;</a>
     </p>
 
     <p>
-        This is the easier list where we count the points by giving every zone <u title="Points Per Take - PPT">100 points</u> and then 
+        This is the harder list where we count the points by giving every zone <u title="Points Per Take - PPT">100 points</u> and then 
         giving you a factor of the absolute maximum of 2 (meaning that no zone can give more than 
         200 points total) and the two factors are zone takes this round and zone takes the last 24 
         hours. Absolutely no <u title="Points Per Hour - PPH">PPH</u> points at all.
     </p>
 
     <p>Columns left to right: [Placement difference], [Place], 
-        [Turfplace], [Name], [Score], [% Diff], [Turfscore] (Rotate screen for all data).
+        [Turfplace], [Name], [score], [% diff], [Turfscore] (Rotate screen for all data). 
         <a href="https://turfutils.github.io/cache/info/example_scores.html" target="_blank">
             Explanation and examples of score calculations.</a>
     </p>
 
-    <p>Updated <b><span class="datestamp">2025-02-08T16:00:26+00:00</span></b></p>
+    <p>Updated <b><span class="datestamp">2025-02-08T16:00:19+00:00</span></b></p>
 
     <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
@@ -160,17 +160,7 @@
 </thead>
 <tbody>
 <tr>
-<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=klmnop&roundid=176" target="_blank" rel="noopener noreferrer">klmnop</a></td><td>14410</td><td>41%</td><td>34660</td><td><a href="https://turfmedals.com/profile/klmnop" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/us.png" height="20" alt="us"></a></td><td>Minnesota</td><td>128</td><td>96</td><td> 61</td></tr>
-<tr>
-<td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=HypnoToad&roundid=176" target="_blank" rel="noopener noreferrer">HypnoToad</a></td><td>11358</td><td>49%</td><td>23088</td><td><a href="https://turfmedals.com/profile/HypnoToad" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/us.png" height="20" alt="us"></a></td><td>Minnesota</td><td>103</td><td>54</td><td> 67</td></tr>
-<tr>
-<td>-</td><td>3</td><td>3</td><td><a href="https://frut.zundin.se/user_round.php?userid=UrukHek&roundid=176" target="_blank" rel="noopener noreferrer">UrukHek</a></td><td>10008</td><td>45%</td><td>22120</td><td><a href="https://turfmedals.com/profile/UrukHek" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/us.png" height="20" alt="us"></a></td><td>Minnesota</td><td>90</td><td>68</td><td> 82</td></tr>
-<tr>
-<td>-</td><td>4</td><td>4</td><td><a href="https://frut.zundin.se/user_round.php?userid=MNFiberFairy&roundid=176" target="_blank" rel="noopener noreferrer">MNFiberFairy</a></td><td>1020</td><td>29%</td><td>3489</td><td><a href="https://turfmedals.com/profile/MNFiberFairy" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/us.png" height="20" alt="us"></a></td><td>Minnesota</td><td>9</td><td>6</td><td>  3</td></tr>
-<tr>
-<td>-</td><td>5</td><td>5</td><td><a href="https://frut.zundin.se/user_round.php?userid=CKYonwheels&roundid=176" target="_blank" rel="noopener noreferrer">CKYonwheels</a></td><td>605</td><td>38%</td><td>1563</td><td><a href="https://turfmedals.com/profile/CKYonwheels" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/us.png" height="20" alt="us"></a></td><td>Minnesota</td><td>5</td><td>1</td><td>  0</td></tr>
-<tr>
-<td>-</td><td>6</td><td>6</td><td><a href="https://frut.zundin.se/user_round.php?userid=MNswedie&roundid=176" target="_blank" rel="noopener noreferrer">MNswedie</a></td><td>200</td><td>28%</td><td>703</td><td><a href="https://turfmedals.com/profile/MNswedie" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/us.png" height="20" alt="us"></a></td><td>Minnesota</td><td>1</td><td>1</td><td>  0</td></tr>
+<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=Fanboy&roundid=176" target="_blank" rel="noopener noreferrer">Fanboy</a></td><td>2304</td><td>38%</td><td>6049</td><td><a href="https://turfmedals.com/profile/Fanboy" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/nl.png" height="20" alt="nl"></a></td><td>Zeeland</td><td>22</td><td>21</td><td>  8</td></tr>
 </tbody>
 </table>        </div>
         <!--</div>-->
