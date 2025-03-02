@@ -3,7 +3,7 @@
     <head>
 
         <meta charset="utf-8">
-        <title>Turf a Million [Belgium]</title>
+        <title>Twenty4 hour rush [Sachsen]</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -40,7 +40,7 @@
 
         async function loadSelectBox() {
             try {
-                const response = await fetch('/cache/area_lists/area_list_altscore_b.json'); // Load external JSON file
+                const response = await fetch('/cache/area_lists/area_list_altscore_a2.json'); // Load external JSON file
                 jsonData = await response.json();
                 if (jsonData.categories) {
                     createSelectBox(jsonData.categories, "level-1");
@@ -127,29 +127,28 @@
         <div style="padding-left:5px;">
             
 <div style="max-width: 700px">
-    <h1>Turf a Million</h1>
-            <h3>[Belgium]</h3>
-        <h3>Round 2025-03</h3>
+    <h1>Twenty4 hour rush</h1>
+            <h3>[Sachsen]</h3>
+        <h3>Round 2025-03 (Alt 2)</h3>
     <p>
         <a href="2025-02.html">&lt;&lt; 2025-02</a> --- 
         <a href="2025-04.html">2025-04 &gt;&gt;</a>
     </p>
-    <p>Can you reach a score of a million points?</p>
-    
-    <div class="more">
-        <p>This is a list where you cannot get more than a million points. One third of the factor is 
-            determind by the amount of takes you have, one third of the factor is determind by the amount 
-            of round uniques you have and the last third of the factor is determind by the amount of 
-            travel distance you have this round.</p>
 
-        <p>Columns left to right: [Placement difference], [Place], 
-            [Turfplace], [Name], [Score], [% diff], [Turfscore] (Rotate screen for all data). 
-            <a href="https://turfutils.github.io/cache/info/example_scores.html" target="_blank">
-                Explanation and examples of score calculations.</a>
-        </p>
-    </div>
+    <p>
+        This is the harder list where we count the points by giving every zone <u title="Points Per Take - PPT">100 points</u> and then 
+        giving you a factor of the absolute maximum of 2 (meaning that no zone can give more than 
+        200 points total) and the two factors are zone takes this round and zone takes the last 24 
+        hours. Absolutely no <u title="Points Per Hour - PPH">PPH</u> points at all.
+    </p>
 
-    <p>Updated <b><span class="datestamp">2025-03-02T17:00:32+00:00</span></b></p>
+    <p>Columns left to right: [Placement difference], [Place], 
+        [Turfplace], [Name], [score], [% diff], [Turfscore] (Rotate screen for all data). 
+        <a href="https://turfutils.github.io/cache/info/example_scores.html" target="_blank">
+            Explanation and examples of score calculations.</a>
+    </p>
+
+    <p>Updated <b><span class="datestamp">2025-03-02T17:00:35+00:00</span></b></p>
 
     <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
@@ -161,9 +160,7 @@
 </thead>
 <tbody>
 <tr>
-<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=Bernie27&roundid=177" target="_blank" rel="noopener noreferrer">Bernie27</a></td><td>300</td><td>31%</td><td>953</td><td><a href="https://turfmedals.com/profile/Bernie27" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/.png" height="20" alt=""></a></td><td>Belgium</td><td>3</td><td>1</td><td>  0</td></tr>
-<tr>
-<td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=MajaGr%C3%A4ddnos&roundid=177" target="_blank" rel="noopener noreferrer">MajaGräddnos</a></td><td>243</td><td>53%</td><td>452</td><td><a href="https://turfmedals.com/profile/MajaGr%C3%A4ddnos" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/.png" height="20" alt=""></a></td><td>Belgium</td><td>2</td><td>1</td><td>  0</td></tr>
+<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=M%C3%B6we68&roundid=177" target="_blank" rel="noopener noreferrer">Möwe68</a></td><td>400</td><td>42%</td><td>941</td><td><a href="https://turfmedals.com/profile/M%C3%B6we68" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Sachsen</td><td>3</td><td>1</td><td>  0</td></tr>
 </tbody>
 </table>        </div>
         <!--</div>-->
