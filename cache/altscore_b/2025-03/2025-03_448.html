@@ -3,7 +3,7 @@
     <head>
 
         <meta charset="utf-8">
-        <title>Turf EQualized scoring [Lappi]</title>
+        <title>Turf a Million [Baden-Württemberg]</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -40,7 +40,7 @@
 
         async function loadSelectBox() {
             try {
-                const response = await fetch('/cache/area_lists/area_list_altscore_a1.json'); // Load external JSON file
+                const response = await fetch('/cache/area_lists/area_list_altscore_b.json'); // Load external JSON file
                 jsonData = await response.json();
                 if (jsonData.categories) {
                     createSelectBox(jsonData.categories, "level-1");
@@ -127,28 +127,29 @@
         <div style="padding-left:5px;">
             
 <div style="max-width: 700px">
-    <h1>EQualized scoring</h1>
-            <h3>[Lappi]</h3>
-        <h3>Round 2025-03 (Alt 1)</h3>
+    <h1>Turf a Million</h1>
+            <h3>[Baden-Württemberg]</h3>
+        <h3>Round 2025-03</h3>
     <p>
         <a href="2025-02.html">&lt;&lt; 2025-02</a> --- 
         <a href="2025-04.html">2025-04 &gt;&gt;</a>
     </p>
+    <p>Can you reach a score of a million points?</p>
+    
+    <div class="more">
+        <p>This is a list where you cannot get more than a million points. One third of the factor is 
+            determind by the amount of takes you have, one third of the factor is determind by the amount 
+            of round uniques you have and the last third of the factor is determind by the amount of 
+            travel distance you have this round.</p>
 
-    <p>
-        This is the easier list where we count the points by giving every zone <u title="Points Per Take - PPT">100 points</u> and then 
-        giving you a factor of the absolute maximum of 2 (meaning that no zone can give more than 
-        200 points total) and the two factors are zone takes this round and zone takes the last 24 
-        hours. Absolutely no <u title="Points Per Hour - PPH">PPH</u> points at all.
-    </p>
+        <p>Columns left to right: [Placement difference], [Place], 
+            [Turfplace], [Name], [Score], [% diff], [Turfscore] (Rotate screen for all data). 
+            <a href="https://turfutils.github.io/cache/info/example_scores.html" target="_blank">
+                Explanation and examples of score calculations.</a>
+        </p>
+    </div>
 
-    <p>Columns left to right: [Placement difference], [Place], 
-        [Turfplace], [Name], [Score], [% Diff], [Turfscore] (Rotate screen for all data).
-        <a href="https://turfutils.github.io/cache/info/example_scores.html" target="_blank">
-            Explanation and examples of score calculations.</a>
-    </p>
-
-    <p>Updated <b><span class="datestamp">2025-03-04T14:30:22+00:00</span></b></p>
+    <p>Updated <b><span class="datestamp">2025-03-04T14:30:25+00:00</span></b></p>
 
     <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
@@ -160,7 +161,7 @@
 </thead>
 <tbody>
 <tr>
-<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=PiteKingen&roundid=177" target="_blank" rel="noopener noreferrer">PiteKingen</a></td><td>503</td><td>41%</td><td>1222</td><td><a href="https://turfmedals.com/profile/PiteKingen" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/fi.png" height="20" alt="fi"></a></td><td>Lappi</td><td>4</td><td>1</td><td>  1</td></tr>
+<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=allinug&roundid=177" target="_blank" rel="noopener noreferrer">allinug</a></td><td>9704</td><td><nobr class="up">111%</nobr></td><td>8666</td><td><a href="https://turfmedals.com/profile/allinug" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/de.png" height="20" alt="de"></a></td><td>Baden-Württemberg</td><td>37</td><td>35</td><td> 16</td></tr>
 </tbody>
 </table>        </div>
         <!--</div>-->
