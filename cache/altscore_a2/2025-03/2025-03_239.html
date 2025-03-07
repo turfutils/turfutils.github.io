@@ -3,7 +3,7 @@
     <head>
 
         <meta charset="utf-8">
-        <title>Turf EQualized scoring [nl]</title>
+        <title>Twenty4 hour rush [Singapore]</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -40,7 +40,7 @@
 
         async function loadSelectBox() {
             try {
-                const response = await fetch('/cache/area_lists/area_list_altscore_a1.json'); // Load external JSON file
+                const response = await fetch('/cache/area_lists/area_list_altscore_a2.json'); // Load external JSON file
                 jsonData = await response.json();
                 if (jsonData.categories) {
                     createSelectBox(jsonData.categories, "level-1");
@@ -127,28 +127,28 @@
         <div style="padding-left:5px;">
             
 <div style="max-width: 700px">
-    <h1>EQualized scoring</h1>
-            <h3>[nl]</h3>
-        <h3>Round 2025-03 (Alt 1)</h3>
+    <h1>Twenty4 hour rush</h1>
+            <h3>[Singapore]</h3>
+        <h3>Round 2025-03 (Alt 2)</h3>
     <p>
         <a href="2025-02.html">&lt;&lt; 2025-02</a> --- 
         <a href="2025-04.html">2025-04 &gt;&gt;</a>
     </p>
 
     <p>
-        This is the easier list where we count the points by giving every zone <u title="Points Per Take - PPT">100 points</u> and then 
+        This is the harder list where we count the points by giving every zone <u title="Points Per Take - PPT">100 points</u> and then 
         giving you a factor of the absolute maximum of 2 (meaning that no zone can give more than 
         200 points total) and the two factors are zone takes this round and zone takes the last 24 
         hours. Absolutely no <u title="Points Per Hour - PPH">PPH</u> points at all.
     </p>
 
     <p>Columns left to right: [Placement difference], [Place], 
-        [Turfplace], [Name], [Score], [% Diff], [Turfscore] (Rotate screen for all data).
+        [Turfplace], [Name], [score], [% diff], [Turfscore] (Rotate screen for all data). 
         <a href="https://turfutils.github.io/cache/info/example_scores.html" target="_blank">
             Explanation and examples of score calculations.</a>
     </p>
 
-    <p>Updated <b><span class="datestamp">2025-03-07T01:30:16+00:00</span></b></p>
+    <p>Updated <b><span class="datestamp">2025-03-07T01:30:28+00:00</span></b></p>
 
     <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
 
@@ -160,17 +160,7 @@
 </thead>
 <tbody>
 <tr>
-<td><nobr class="up">+2</nobr></td><td>1</td><td>3</td><td><a href="https://frut.zundin.se/user_round.php?userid=Fredrik72&roundid=177" target="_blank" rel="noopener noreferrer">Fredrik72</a></td><td>3733</td><td>60%</td><td>6148</td><td><a href="https://turfmedals.com/profile/Fredrik72" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/nl.png" height="20" alt="nl"></a></td><td>Noord-Holland</td><td>34</td><td>26</td><td> 11</td></tr>
-<tr>
-<td><nobr class="down">-1</nobr></td><td>2</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=Mamzilla&roundid=177" target="_blank" rel="noopener noreferrer">Mamzilla</a></td><td>2914</td><td>40%</td><td>7167</td><td><a href="https://turfmedals.com/profile/Mamzilla" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/nl.png" height="20" alt="nl"></a></td><td>Noord-Holland</td><td>27</td><td>23</td><td> 11</td></tr>
-<tr>
-<td><nobr class="down">-1</nobr></td><td>3</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=mana333&roundid=177" target="_blank" rel="noopener noreferrer">mana333</a></td><td>2627</td><td>40%</td><td>6484</td><td><a href="https://turfmedals.com/profile/mana333" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/nl.png" height="20" alt="nl"></a></td><td>Utrecht</td><td>24</td><td>20</td><td> 14</td></tr>
-<tr>
-<td>-</td><td>4</td><td>4</td><td><a href="https://frut.zundin.se/user_round.php?userid=TOP_G&roundid=177" target="_blank" rel="noopener noreferrer">TOP_G</a></td><td>608</td><td>40%</td><td>1505</td><td><a href="https://turfmedals.com/profile/TOP_G" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/nl.png" height="20" alt="nl"></a></td><td>Limburg</td><td>5</td><td>1</td><td>  0</td></tr>
-<tr>
-<td>-</td><td>5</td><td>5</td><td><a href="https://frut.zundin.se/user_round.php?userid=atalanta&roundid=177" target="_blank" rel="noopener noreferrer">atalanta</a></td><td>301</td><td>32%</td><td>914</td><td><a href="https://turfmedals.com/profile/atalanta" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/nl.png" height="20" alt="nl"></a></td><td>Noord-Brabant</td><td>2</td><td>1</td><td>  0</td></tr>
-<tr>
-<td>-</td><td>6</td><td>6</td><td><a href="https://frut.zundin.se/user_round.php?userid=Heffos&roundid=177" target="_blank" rel="noopener noreferrer">Heffos</a></td><td>300</td><td>37%</td><td>805</td><td><a href="https://turfmedals.com/profile/Heffos" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/nl.png" height="20" alt="nl"></a></td><td>Noord-Brabant</td><td>2</td><td>1</td><td>  0</td></tr>
+<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=BGebruers&roundid=177" target="_blank" rel="noopener noreferrer">BGebruers</a></td><td>100</td><td>54%</td><td>185</td><td><a href="https://turfmedals.com/profile/BGebruers" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/.png" height="20" alt=""></a></td><td>Singapore</td><td>0</td><td></td><td>  0</td></tr>
 </tbody>
 </table>        </div>
         <!--</div>-->
