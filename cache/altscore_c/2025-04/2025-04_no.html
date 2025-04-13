@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <title>Endurance [no]</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- Mobile Specific Metas
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- FONT
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+        <!-- CSS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/barebones.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/turf.css" rel="stylesheet" type="text/css" />
+
+                <script src="/assets/js/sortable.min.js"></script>
+        <script src="/assets/js/utils.js"></script>
+        
+        <link rel="icon" type="image/png" href="assets/img/favicon-16.png">
+
+    </head>
+    <body>
+                    <div style="padding-left:5px;">
+                    <div id="select-container">
+        <!-- Select boxes added dynamically here -->
+    </div>
+
+
+    <script>
+        // Store select box structure here:
+        let jsonData = {};
+
+        async function loadSelectBox() {
+            try {
+                const response = await fetch('/cache/area_lists/area_list_altscore_c.json'); // Load external JSON file
+                jsonData = await response.json();
+                if (jsonData.categories) {
+                    createSelectBox(jsonData.categories, "level-1");
+                }
+            } catch (error) {
+                console.error("Error loading JSON data:", error);
+            }
+        }
+
+        function createSelectBox(data, level) {
+            const container = document.getElementById("select-container");
+
+            // Remove all select boxes beyond this level
+            removeLowerLevels(level);
+
+            // Create a new select box
+            const select = document.createElement("select");
+            select.id = level;
+            select.dataset.level = level;
+            select.innerHTML = '<option value="">Select...</option>';
+
+            data.forEach((entry, index) => {
+                const option = document.createElement("option");
+                option.value = index; // Store index for lookup
+                option.textContent = entry.name;
+                option.dataset.index = index;
+                option.dataset.link = entry.link || ""; // Store link only if it's a leaf node
+                select.appendChild(option);
+            });
+
+            container.appendChild(select);
+
+            // Event listener to handle selection changes
+            select.addEventListener("change", function () {
+                handleSelection(this, data);
+            });
+        }
+
+        function handleSelection(selectElement, data) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const selectedIndex = selectedOption.dataset.index;
+            const selectedLink = selectedOption.dataset.link;
+            const level = selectElement.dataset.level;
+
+            if (!selectedIndex) return;
+
+            const selectedData = data[selectedIndex];
+
+            if (selectedLink) {
+                window.location.href = selectedLink; // Redirect if a link exists
+                return;
+            }
+
+            // Determine next level dynamically
+            const nextLevel = `level-${parseInt(level.split('-')[1]) + 1}`;
+
+            if (selectedData.subcategories) {
+                createSelectBox(selectedData.subcategories, nextLevel);
+            } else if (selectedData.items) {
+                createSelectBox(selectedData.items, nextLevel);
+            }
+        }
+
+        function removeLowerLevels(currentLevel) {
+            const container = document.getElementById("select-container");
+            const currentLevelNumber = parseInt(currentLevel.split('-')[1]);
+
+            // Remove all select elements beyond the current level
+            [...container.children].forEach(select => {
+                const selectLevelNumber = parseInt(select.id.split('-')[1]);
+                if (selectLevelNumber >= currentLevelNumber) {
+                    container.removeChild(select);
+                }
+            });
+        }
+
+        // Load and set up selectbox for country/area:
+        loadSelectBox();
+        
+    </script>
+            </div>
+                
+        <!--<div class="grid-container halves">-->
+        <div style="padding-left:5px;">
+            
+<div style="max-width: 700px">
+    <h1>Endurance!</h1>
+            <h3>[no]</h3>
+        <h3>Round 2025-04</h3>
+    <p>
+        <a href="2025-03.html">&lt;&lt; 2025-03</a> --- 
+        <a href="2025-05.html">2025-05 &gt;&gt;</a>
+    </p>
+    <p>The endurance list, how long can you go?</p>
+    
+    <div class="more">
+        <p>The score is dermined by three values. How many takes you did this round, how many hours you 
+            spent turfing and how many round-unique zones you took this round.
+            </p>
+
+        <p>Columns left to right: [Placement difference], [Place], 
+            [Turfplace], [Name], [Score], [% diff], [Turfscore] (Rotate screen for all data). 
+            <a href="https://turfutils.github.io/cache/info/example_scores.html" target="_blank">
+                Explanation and examples of score calculations.</a>
+        </p>
+    </div>
+
+    <p>Updated <b><span class="datestamp">2025-04-13T17:31:50+00:00</span></b></p>
+
+    <input type="text" id="searchInput" onkeyup="searchName(3)" placeholder="Search for names..">
+
+</div>
+<table id="scoretable" border="0" cellpadding="4" cellspacing="0" class="hiscore_table resp-table sortable-theme-bootstrap" data-sortable>
+<thead>
+<tr>
+<th>-+</th><th>#</th><th>(#)</th><th>NAME</th><th>NEW</th><th>DIFF</th><th>OLD</th><th>FLAG</th><th>AREA</th><th>Takes</th><th>Unique</th><th>Km</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td><td>1</td><td>1</td><td><a href="https://frut.zundin.se/user_round.php?userid=Teien&roundid=178" target="_blank" rel="noopener noreferrer">Teien</a></td><td>73343</td><td>91%</td><td>80144</td><td><a href="https://turfmedals.com/profile/Teien" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>229</td><td>215</td><td>117</td></tr>
+<tr>
+<td>-</td><td>2</td><td>2</td><td><a href="https://frut.zundin.se/user_round.php?userid=thomasito&roundid=178" target="_blank" rel="noopener noreferrer">thomasito</a></td><td>73331</td><td><nobr class="up">107%</nobr></td><td>67900</td><td><a href="https://turfmedals.com/profile/thomasito" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>243</td><td>210</td><td>110</td></tr>
+<tr>
+<td>-</td><td>3</td><td>3</td><td><a href="https://frut.zundin.se/user_round.php?userid=North_Wing&roundid=178" target="_blank" rel="noopener noreferrer">North_Wing</a></td><td>32056</td><td>93%</td><td>34134</td><td><a href="https://turfmedals.com/profile/North_Wing" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Vestlandet</td><td>105</td><td>98</td><td> 50</td></tr>
+<tr>
+<td>-</td><td>4</td><td>4</td><td><a href="https://frut.zundin.se/user_round.php?userid=Tacos&roundid=178" target="_blank" rel="noopener noreferrer">Tacos</a></td><td>29469</td><td>94%</td><td>31110</td><td><a href="https://turfmedals.com/profile/Tacos" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Trøndelag</td><td>95</td><td>91</td><td> 64</td></tr>
+<tr>
+<td>-</td><td>5</td><td>5</td><td><a href="https://frut.zundin.se/user_round.php?userid=Bentite&roundid=178" target="_blank" rel="noopener noreferrer">Bentite</a></td><td>24734</td><td>97%</td><td>25425</td><td><a href="https://turfmedals.com/profile/Bentite" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>104</td><td>62</td><td> 51</td></tr>
+<tr>
+<td>-</td><td>6</td><td>6</td><td><a href="https://frut.zundin.se/user_round.php?userid=Minkemann&roundid=178" target="_blank" rel="noopener noreferrer">Minkemann</a></td><td>12097</td><td><nobr class="up">105%</nobr></td><td>11494</td><td><a href="https://turfmedals.com/profile/Minkemann" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>42</td><td>37</td><td> 17</td></tr>
+<tr>
+<td>-</td><td>7</td><td>7</td><td><a href="https://frut.zundin.se/user_round.php?userid=Orresta&roundid=178" target="_blank" rel="noopener noreferrer">Orresta</a></td><td>11585</td><td><nobr class="up">103%</nobr></td><td>11192</td><td><a href="https://turfmedals.com/profile/Orresta" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Trøndelag</td><td>40</td><td>36</td><td> 14</td></tr>
+<tr>
+<td><nobr class="up">+1</nobr></td><td>8</td><td>9</td><td><a href="https://frut.zundin.se/user_round.php?userid=Lofter&roundid=178" target="_blank" rel="noopener noreferrer">Lofter</a></td><td>9527</td><td><nobr class="up">100%</nobr></td><td>9514</td><td><a href="https://turfmedals.com/profile/Lofter" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>32</td><td>30</td><td> 14</td></tr>
+<tr>
+<td><nobr class="up">+9</nobr></td><td>9</td><td>18</td><td><a href="https://frut.zundin.se/user_round.php?userid=GeoZebra&roundid=178" target="_blank" rel="noopener noreferrer">GeoZebra</a></td><td></td><td>0%</td><td>3544</td><td><a href="https://turfmedals.com/profile/GeoZebra" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Nordnorge</td><td>9</td><td>6</td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+21</nobr></td><td>10</td><td>31</td><td><a href="https://frut.zundin.se/user_round.php?userid=swemil&roundid=178" target="_blank" rel="noopener noreferrer">swemil</a></td><td></td><td>0%</td><td>1645</td><td><a href="https://turfmedals.com/profile/swemil" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>6</td><td>3</td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+23</nobr></td><td>11</td><td>34</td><td><a href="https://frut.zundin.se/user_round.php?userid=n1479&roundid=178" target="_blank" rel="noopener noreferrer">n1479</a></td><td></td><td>0%</td><td>696</td><td><a href="https://turfmedals.com/profile/n1479" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>1</td><td>1</td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+17</nobr></td><td>12</td><td>29</td><td><a href="https://frut.zundin.se/user_round.php?userid=Fellowski&roundid=178" target="_blank" rel="noopener noreferrer">Fellowski</a></td><td></td><td>0%</td><td>1892</td><td><a href="https://turfmedals.com/profile/Fellowski" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>8</td><td>6</td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+8</nobr></td><td>13</td><td>21</td><td><a href="https://frut.zundin.se/user_round.php?userid=Fredogfrihet&roundid=178" target="_blank" rel="noopener noreferrer">Fredogfrihet</a></td><td></td><td>0%</td><td>3239</td><td><a href="https://turfmedals.com/profile/Fredogfrihet" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>12</td><td>11</td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+19</nobr></td><td>14</td><td>33</td><td><a href="https://frut.zundin.se/user_round.php?userid=Kimber&roundid=178" target="_blank" rel="noopener noreferrer">Kimber</a></td><td></td><td>0%</td><td>1201</td><td><a href="https://turfmedals.com/profile/Kimber" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>4</td><td>1</td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+28</nobr></td><td>15</td><td>43</td><td><a href="https://frut.zundin.se/user_round.php?userid=HappyWalker&roundid=178" target="_blank" rel="noopener noreferrer">HappyWalker</a></td><td></td><td>0%</td><td>185</td><td><a href="https://turfmedals.com/profile/HappyWalker" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>0</td><td></td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+19</nobr></td><td>16</td><td>35</td><td><a href="https://frut.zundin.se/user_round.php?userid=APT&roundid=178" target="_blank" rel="noopener noreferrer">APT</a></td><td></td><td>0%</td><td>403</td><td><a href="https://turfmedals.com/profile/APT" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Trøndelag</td><td>1</td><td>1</td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+24</nobr></td><td>17</td><td>41</td><td><a href="https://frut.zundin.se/user_round.php?userid=puffin44&roundid=178" target="_blank" rel="noopener noreferrer">puffin44</a></td><td></td><td>0%</td><td>253</td><td><a href="https://turfmedals.com/profile/puffin44" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Vestlandet</td><td>0</td><td></td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+22</nobr></td><td>18</td><td>40</td><td><a href="https://frut.zundin.se/user_round.php?userid=farangen&roundid=178" target="_blank" rel="noopener noreferrer">farangen</a></td><td></td><td>0%</td><td>269</td><td><a href="https://turfmedals.com/profile/farangen" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Trøndelag</td><td>0</td><td></td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+9</nobr></td><td>19</td><td>28</td><td><a href="https://frut.zundin.se/user_round.php?userid=madiemaniac&roundid=178" target="_blank" rel="noopener noreferrer">madiemaniac</a></td><td></td><td>0%</td><td>2019</td><td><a href="https://turfmedals.com/profile/madiemaniac" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>9</td><td>6</td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+6</nobr></td><td>20</td><td>26</td><td><a href="https://frut.zundin.se/user_round.php?userid=Xpexial&roundid=178" target="_blank" rel="noopener noreferrer">Xpexial</a></td><td></td><td>0%</td><td>2169</td><td><a href="https://turfmedals.com/profile/Xpexial" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>9</td><td>6</td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+18</nobr></td><td>21</td><td>39</td><td><a href="https://frut.zundin.se/user_round.php?userid=anneland&roundid=178" target="_blank" rel="noopener noreferrer">anneland</a></td><td></td><td>0%</td><td>278</td><td><a href="https://turfmedals.com/profile/anneland" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Nordnorge</td><td>0</td><td></td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+16</nobr></td><td>22</td><td>38</td><td><a href="https://frut.zundin.se/user_round.php?userid=pica42&roundid=178" target="_blank" rel="noopener noreferrer">pica42</a></td><td></td><td>0%</td><td>295</td><td><a href="https://turfmedals.com/profile/pica42" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Vestlandet</td><td>0</td><td></td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+19</nobr></td><td>23</td><td>42</td><td><a href="https://frut.zundin.se/user_round.php?userid=AllWeek&roundid=178" target="_blank" rel="noopener noreferrer">AllWeek</a></td><td></td><td>0%</td><td>187</td><td><a href="https://turfmedals.com/profile/AllWeek" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Vestlandet</td><td>0</td><td></td><td>  0</td></tr>
+<tr>
+<td><nobr class="up">+13</nobr></td><td>24</td><td>37</td><td><a href="https://frut.zundin.se/user_round.php?userid=Agathapus&roundid=178" target="_blank" rel="noopener noreferrer">Agathapus</a></td><td></td><td>0%</td><td>370</td><td><a href="https://turfmedals.com/profile/Agathapus" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Nordnorge</td><td>1</td><td>1</td><td>  0</td></tr>
+<tr>
+<td><nobr class="down">-10</nobr></td><td>25</td><td>15</td><td><a href="https://frut.zundin.se/user_round.php?userid=Pepperrot&roundid=178" target="_blank" rel="noopener noreferrer">Pepperrot</a></td><td></td><td>0%</td><td>4522</td><td><a href="https://turfmedals.com/profile/Pepperrot" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>16</td><td>13</td><td>  0</td></tr>
+<tr>
+<td><nobr class="down">-9</nobr></td><td>26</td><td>17</td><td><a href="https://frut.zundin.se/user_round.php?userid=theturfmother&roundid=178" target="_blank" rel="noopener noreferrer">theturfmother</a></td><td></td><td>0%</td><td>3692</td><td><a href="https://turfmedals.com/profile/theturfmother" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>14</td><td>10</td><td>  0</td></tr>
+<tr>
+<td><nobr class="down">-8</nobr></td><td>27</td><td>19</td><td><a href="https://frut.zundin.se/user_round.php?userid=mrknut&roundid=178" target="_blank" rel="noopener noreferrer">mrknut</a></td><td></td><td>0%</td><td>3543</td><td><a href="https://turfmedals.com/profile/mrknut" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>10</td><td>6</td><td>  3</td></tr>
+<tr>
+<td><nobr class="up">+2</nobr></td><td>28</td><td>30</td><td><a href="https://frut.zundin.se/user_round.php?userid=-kbk-&roundid=178" target="_blank" rel="noopener noreferrer">-kbk-</a></td><td></td><td>0%</td><td>1841</td><td><a href="https://turfmedals.com/profile/-kbk-" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>6</td><td>6</td><td>  1</td></tr>
+<tr>
+<td><nobr class="down">-18</nobr></td><td>29</td><td>11</td><td><a href="https://frut.zundin.se/user_round.php?userid=KingOfDHill&roundid=178" target="_blank" rel="noopener noreferrer">KingOfDHill</a></td><td></td><td>0%</td><td>6368</td><td><a href="https://turfmedals.com/profile/KingOfDHill" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Vestlandet</td><td>17</td><td>15</td><td>  3</td></tr>
+<tr>
+<td><nobr class="down">-20</nobr></td><td>30</td><td>10</td><td><a href="https://frut.zundin.se/user_round.php?userid=superkarianne&roundid=178" target="_blank" rel="noopener noreferrer">superkarianne</a></td><td></td><td>0%</td><td>8902</td><td><a href="https://turfmedals.com/profile/superkarianne" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>32</td><td>24</td><td> 14</td></tr>
+<tr>
+<td><nobr class="down">-18</nobr></td><td>31</td><td>13</td><td><a href="https://frut.zundin.se/user_round.php?userid=Sirtloh&roundid=178" target="_blank" rel="noopener noreferrer">Sirtloh</a></td><td></td><td>0%</td><td>5881</td><td><a href="https://turfmedals.com/profile/Sirtloh" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>15</td><td>11</td><td> 12</td></tr>
+<tr>
+<td><nobr class="down">-18</nobr></td><td>32</td><td>14</td><td><a href="https://frut.zundin.se/user_round.php?userid=Bladfyken&roundid=178" target="_blank" rel="noopener noreferrer">Bladfyken</a></td><td></td><td>0%</td><td>4694</td><td><a href="https://turfmedals.com/profile/Bladfyken" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>19</td><td>13</td><td>  0</td></tr>
+<tr>
+<td><nobr class="down">-10</nobr></td><td>33</td><td>23</td><td><a href="https://frut.zundin.se/user_round.php?userid=RoboKop&roundid=178" target="_blank" rel="noopener noreferrer">RoboKop</a></td><td></td><td>0%</td><td>3198</td><td><a href="https://turfmedals.com/profile/RoboKop" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>9</td><td>6</td><td>  1</td></tr>
+<tr>
+<td><nobr class="down">-2</nobr></td><td>34</td><td>32</td><td><a href="https://frut.zundin.se/user_round.php?userid=solami&roundid=178" target="_blank" rel="noopener noreferrer">solami</a></td><td></td><td>0%</td><td>1501</td><td><a href="https://turfmedals.com/profile/solami" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Nordnorge</td><td>4</td><td>1</td><td>  0</td></tr>
+<tr>
+<td><nobr class="down">-23</nobr></td><td>35</td><td>12</td><td><a href="https://frut.zundin.se/user_round.php?userid=KingKeb&roundid=178" target="_blank" rel="noopener noreferrer">KingKeb</a></td><td></td><td>0%</td><td>6080</td><td><a href="https://turfmedals.com/profile/KingKeb" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Nordnorge</td><td>20</td><td>14</td><td>  0</td></tr>
+<tr>
+<td><nobr class="down">-28</nobr></td><td>36</td><td>8</td><td><a href="https://frut.zundin.se/user_round.php?userid=Sk%C3%A5ningiNorge&roundid=178" target="_blank" rel="noopener noreferrer">SkåningiNorge</a></td><td></td><td>0%</td><td>9696</td><td><a href="https://turfmedals.com/profile/Sk%C3%A5ningiNorge" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>32</td><td>28</td><td>  8</td></tr>
+<tr>
+<td><nobr class="down">-1</nobr></td><td>37</td><td>36</td><td><a href="https://frut.zundin.se/user_round.php?userid=Kongenavkos&roundid=178" target="_blank" rel="noopener noreferrer">Kongenavkos</a></td><td></td><td>0%</td><td>390</td><td><a href="https://turfmedals.com/profile/Kongenavkos" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Trøndelag</td><td>0</td><td></td><td>  0</td></tr>
+<tr>
+<td><nobr class="down">-14</nobr></td><td>38</td><td>24</td><td><a href="https://frut.zundin.se/user_round.php?userid=minimann&roundid=178" target="_blank" rel="noopener noreferrer">minimann</a></td><td></td><td>0%</td><td>2737</td><td><a href="https://turfmedals.com/profile/minimann" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Vestlandet</td><td>7</td><td>6</td><td>  0</td></tr>
+<tr>
+<td><nobr class="down">-14</nobr></td><td>39</td><td>25</td><td><a href="https://frut.zundin.se/user_round.php?userid=LordNorth&roundid=178" target="_blank" rel="noopener noreferrer">LordNorth</a></td><td></td><td>0%</td><td>2300</td><td><a href="https://turfmedals.com/profile/LordNorth" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Vestlandet</td><td>6</td><td>6</td><td>  0</td></tr>
+<tr>
+<td><nobr class="down">-18</nobr></td><td>40</td><td>22</td><td><a href="https://frut.zundin.se/user_round.php?userid=romulus78&roundid=178" target="_blank" rel="noopener noreferrer">romulus78</a></td><td></td><td>0%</td><td>3209</td><td><a href="https://turfmedals.com/profile/romulus78" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Trøndelag</td><td>11</td><td>8</td><td>  0</td></tr>
+<tr>
+<td><nobr class="down">-25</nobr></td><td>41</td><td>16</td><td><a href="https://frut.zundin.se/user_round.php?userid=YNWA2417&roundid=178" target="_blank" rel="noopener noreferrer">YNWA2417</a></td><td></td><td>0%</td><td>4266</td><td><a href="https://turfmedals.com/profile/YNWA2417" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>16</td><td>16</td><td>  0</td></tr>
+<tr>
+<td><nobr class="down">-22</nobr></td><td>42</td><td>20</td><td><a href="https://frut.zundin.se/user_round.php?userid=elhop&roundid=178" target="_blank" rel="noopener noreferrer">elhop</a></td><td></td><td>0%</td><td>3539</td><td><a href="https://turfmedals.com/profile/elhop" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Vestlandet</td><td>11</td><td>11</td><td>  0</td></tr>
+<tr>
+<td><nobr class="down">-16</nobr></td><td>43</td><td>27</td><td><a href="https://frut.zundin.se/user_round.php?userid=Behber&roundid=178" target="_blank" rel="noopener noreferrer">Behber</a></td><td></td><td>0%</td><td>2163</td><td><a href="https://turfmedals.com/profile/Behber" target="_blank" rel="noopener noreferrer"><img src="https://flagcdn.com/h20/no.png" height="20" alt="no"></a></td><td>Østlandet</td><td>6</td><td>5</td><td>  0</td></tr>
+</tbody>
+</table>        </div>
+        <!--</div>-->
+
+
+        <script>
+            function searchName(col = 3) {
+                // Declare variables
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("searchInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("scoretable");
+                tr = table.getElementsByTagName("tr");
+
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[col];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+            }
+            }
+
+            /* --------------------------
+             * Convert all span elements with class "datestamp" to local timezone for user:
+             */
+            const datestampElements = document.querySelectorAll('span.datestamp');
+
+            datestampElements.forEach((element) => {
+                const datestampText = element.textContent;
+
+                try {
+                    const date = new Date(datestampText);
+
+                    // Check if the date is valid
+                    if (isNaN(date)) {
+                        throw new Error("Invalid date format");
+                    }
+
+                    // Format the date as YYYY-MM-DD
+                    const formattedDate = date.toLocaleDateString("sv-SE"); // "sv-SE" uses ISO 8601 format (YYYY-MM-DD)
+
+                    // Format the time as HH:mm:ss
+                    const formattedTime = date.toLocaleTimeString("sv-SE", {
+                        hour12: false, // 24-hour format
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                    });
+                    const formattedDateTime = `${formattedDate}T${formattedTime}`;
+
+                    // Update the text content of the element
+                    element.textContent = formattedDateTime + ' (local time)';
+                } catch (error) {
+                    console.error(`Error processing date for element: ${datestampText}`, error.message);
+                }
+            });
+        </script>
+    </body>
+</html>
