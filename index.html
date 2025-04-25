@@ -12,6 +12,23 @@
         <link rel="icon" type="image/png" href="/assets/favicon-16.png">
 
         <style>
+            :root {
+                --color-bg: #eee0ee;
+                --color-border: #cacfd5;
+                --color-fg: #0b1016;
+                --color-base: #f4f5f6;
+                --color-accent: #ba0d37;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --color-bg: #38444c;
+                    --color-border: #697278;
+                    --color-fg: #f0f2f3;
+                    --color-base: #293238;
+                    --color-accent: #ec1a62;
+                }
+            }
+
             header {
                 margin-bottom: 2em;
             }
@@ -40,9 +57,15 @@
                 header nav ul li img {
                     filter: invert(1);
                 }
-                a:link {color: #ffff00;}
-                a:visited {color: #ffaa00;}
-                a:hover {color: #ff0000;}
+                a:link {
+                    color: #ffff00;
+                }
+                a:visited {
+                    color: #ffaa00;
+                }
+                a:hover {
+                    color: #ff0000;
+                }
             }
         </style>      
     </head>
